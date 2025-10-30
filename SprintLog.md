@@ -38,3 +38,5 @@ Closing of sprint 0 and creating a plan for sprint 1-
 ## Sprint 1
 Sprint 1 will run from 30/10 - 06/11 - Assignment 2 dd. 08/11
 
+## Looked at git
+
