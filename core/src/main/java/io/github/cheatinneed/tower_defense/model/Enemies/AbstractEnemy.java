@@ -48,7 +48,7 @@ public abstract class AbstractEnemy implements Enemy {
 
     @Override
     public void update(){
-        if (this.getCurrentHealth() >= 0){
+        if (this.getCurrentHealth() <= 0){
             this.isDead = true;
         }
     }
