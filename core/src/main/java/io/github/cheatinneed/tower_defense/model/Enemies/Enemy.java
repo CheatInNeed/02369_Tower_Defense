@@ -11,4 +11,7 @@ public interface Enemy {
     void setCurrentHealth(int health);
     void damage(int damage);
 
+    boolean isDead();
+
+    void update();
 }

@@ -6,6 +6,7 @@ public abstract class AbstractEnemy implements Enemy {
     int currentHealth;
     int level;
     int speed;
+    boolean isDead;
 
     public AbstractEnemy(float x, float y, int maxHealth, int speed) {
 
@@ -15,6 +16,7 @@ public abstract class AbstractEnemy implements Enemy {
         this.currentHealth = maxHealth;
         this.speed = speed;
         this.level = 1;
+        this.isDead = false;
     }
 
     @Override
@@ -40,4 +42,14 @@ public abstract class AbstractEnemy implements Enemy {
 
     @Override
     public void damage(int damage) { this.currentHealth -= damage; }
+
+    @Override
+    public boolean isDead() { return this.isDead; }
+
+    @Override
+    public void update(){
+        if (this.getCurrentHealth() >= 0){
+            this.isDead = true;
+        }
+    }
 }
