@@ -34,9 +34,6 @@ public class Map {
      * @return
      */
     public boolean canPlaceTower(int x,int y){
-        if(getTileTypeAt(x,y).equals("BUILDABLE")){
-            return true;
-        }
-        else{return false;}
+        return getTileTypeAt(x, y) == TileType.BUILDABLE;
     }
 }
