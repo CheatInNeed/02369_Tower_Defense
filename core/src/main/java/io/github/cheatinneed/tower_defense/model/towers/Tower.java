@@ -9,6 +9,7 @@ public interface Tower {
     int getLevel();
     int getHealth();
     float getRange();
+    int getCost();
 
     void attack();
 }

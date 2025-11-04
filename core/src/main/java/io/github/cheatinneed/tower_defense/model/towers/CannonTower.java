@@ -3,7 +3,7 @@ package io.github.cheatinneed.tower_defense.model.towers;
 public class CannonTower extends AbstractTower implements ProjectileTower {
 
     public CannonTower(float x, float y) {
-        super(x, y, 15, 200);
+        super(x, y, 15, 200, 300);
     }
 
     @Override
