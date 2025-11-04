@@ -38,4 +38,6 @@ public abstract class AbstractEnemy implements Enemy {
     @Override
     public int getMaxHealth() { return currentHealth; }
 
+    @Override
+    public void damage(int damage) { this.currentHealth -= damage; }
 }

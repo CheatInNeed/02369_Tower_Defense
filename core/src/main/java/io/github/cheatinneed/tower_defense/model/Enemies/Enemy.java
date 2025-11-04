@@ -9,5 +9,6 @@ public interface Enemy {
     int getCurrentHealth();
     int getMaxHealth();
     void setCurrentHealth(int health);
+    void damage(int damage);
 
 }

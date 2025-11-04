@@ -31,4 +31,10 @@ class CustomEnemyTest {
         assertEquals(4.5f, enemy.getX(), 0.0001f);
         assertEquals(9.0f, enemy.getY(), 0.0001f);
     }
+    @Test
+    void damagingEnemyChangesHealth() {
+        Enemy enemy = EnemyFactory.createEnemy("custom", 0f, 0f, 10,10);
+        enemy.damage(5);
+        assertEquals(5, enemy.getCurrentHealth());
+    }
 }

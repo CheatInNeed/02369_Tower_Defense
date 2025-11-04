@@ -30,4 +30,10 @@ class BasicEnemyTest {
         enemy.setCurrentHealth(0);
         assertEquals(0, enemy.getCurrentHealth());
     }
+    @Test
+    void damagingEnemyChangesHealth() {
+        Enemy enemy = EnemyFactory.createEnemy("basic", 0f, 0f, 0,0);
+        enemy.damage(1);
+        assertEquals(0, enemy.getCurrentHealth());
+    }
 }
