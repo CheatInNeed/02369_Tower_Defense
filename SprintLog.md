@@ -37,6 +37,22 @@ Closing of sprint 0 and creating a plan for sprint 1-
 
 ## Sprint 1
 Sprint 1 will run from 30/10 - 06/11 - Assignment 2 dd. 08/11
+### Sprint 1 standup
+We have split into groups of 2. Each group has a User story which they are implementing. 
+Group 1 - Ludvig and Yaasir
+- Classes, factories and interfaces has been implemented. A tower can be created and placed at an x and y coordinate. 
+- This group is awaiting functions from the group 2 (peter and peter), so the tower can be placed onto a map (logically). 
+- Tower methods are implemented conceptually, but no logic are finalized. 
+- The user story is not finalized atm, since we need to tie it together with the other groups. 
+- 
+
+Group 2 - Peter and peter
+- Implemented logic for maps with tile classes. 
+- None of the graphic is done yet. 
+
+Group 3 - Alexander and Casper
+- 
+
 
 ## Looked at git
 
