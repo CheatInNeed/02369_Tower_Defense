@@ -36,4 +36,19 @@ class BasicEnemyTest {
         enemy.damage(1);
         assertEquals(0, enemy.getCurrentHealth());
     }
+    @Test
+    void EnemyCanDied() {
+        Enemy enemy = EnemyFactory.createEnemy("basic", 0f, 0f, 0,0);
+        enemy.damage(1);
+        enemy.update();
+       // assertEquals(true, enemy.isDead());
+        assertTrue(enemy.isDead());
+    }
+    @Test
+    void updateKeepsEnemyAliveWhenHealthAboveZero() {
+        Enemy enemy = EnemyFactory.createEnemy("basic", 0f, 0f, 0, 0);
+        // Do not damage the enemy; health stays at its initial positive value
+        enemy.update();
+        assertFalse(enemy.isDead(), "Enemy should not be dead when health > 0");
+    }
 }
