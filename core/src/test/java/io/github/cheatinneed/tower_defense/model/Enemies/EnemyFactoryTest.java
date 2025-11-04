@@ -8,8 +8,8 @@ class EnemyFactoryTest {
 
     @Test
     void createsBasicEnemyIgnoringCase() {
-        Enemy e1 = EnemyFactory.createEnemy("basic", 1f, 2f, 999);
-        Enemy e2 = EnemyFactory.createEnemy("BaSiC", -3.5f, 4.25f, 999);
+        Enemy e1 = EnemyFactory.createEnemy("basic", 1f, 2f, 0,0);
+        Enemy e2 = EnemyFactory.createEnemy("BaSiC", -3.5f, 4.25f, 0,0);
         assertTrue(e1 instanceof BasicEnemy);
         assertTrue(e2 instanceof BasicEnemy);
         assertEquals(1f, e1.getX(), 0.0001f);
@@ -23,18 +23,18 @@ class EnemyFactoryTest {
 
     @Test
     void createsCustomEnemyWithProvidedMaxHealth() {
-        Enemy e = EnemyFactory.createEnemy("custom", 10f, 20f, 7);
+        Enemy e = EnemyFactory.createEnemy("custom", 10f, 20f, 10,10);
         assertTrue(e instanceof CustomEnemy);
         assertEquals(10f, e.getX(), 0.0001f);
         assertEquals(20f, e.getY(), 0.0001f);
-        assertEquals(7, e.getCurrentHealth());
-        assertEquals(7, e.getMaxHealth(), "Custom enemy should report the same max health that was provided");
+        assertEquals(10, e.getCurrentHealth());
+        assertEquals(10, e.getMaxHealth(), "Custom enemy should report the same max health that was provided");
     }
 
     @Test
     void throwsOnUnknownType() {
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
-                () -> EnemyFactory.createEnemy("unknown", 0f, 0f, 1));
+                () -> EnemyFactory.createEnemy("unknown", 0f, 0f, 10,10));
         assertTrue(ex.getMessage().contains("Unknown enemy type"));
     }
 }
