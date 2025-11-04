@@ -2,7 +2,7 @@ package io.github.cheatinneed.tower_defense.model.Map;
 
 public class Map {
     private final int width, height;
-    private final Tile[][] grid;
+    public final Tile[][] grid;
 
 
     public Map(int width, int height, int[] start, int[] end){
