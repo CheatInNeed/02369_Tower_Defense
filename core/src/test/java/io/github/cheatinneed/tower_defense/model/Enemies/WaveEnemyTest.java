@@ -25,7 +25,7 @@ public class WaveEnemyTest {
             fail("Loading json file failed: " + e.getMessage());
         }
 
-        List<Enemy> enemies = jsonLineController.getSpawnedEnemies();
+        List<Enemy> enemies = jsonLineController.getCreatedEnemies();
 
         // 1) We should have 20 enemies from the file
         assertEquals(20, enemies.size(), "Expected 20 enemies to be spawned");
