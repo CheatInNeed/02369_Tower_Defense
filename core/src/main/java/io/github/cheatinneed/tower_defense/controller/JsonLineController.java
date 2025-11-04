@@ -9,9 +9,18 @@ public class JsonLineController {
         switch (action) {
             case "spawnEnemy" -> {
                 String enemyType = json.get("enemyType").getAsString();
+                int delay = json.get("delay").getAsInt();
                 float x = json.get("x").getAsFloat();
                 float y = json.get("y").getAsFloat();
-                spawnEnemy(enemyType, x, y);
+                try {
+                    if (delay > 0) {
+                        Thread.sleep(delay);  // wait before spawning
+                    }
+                    spawnEnemy(enemyType, x, y);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt(); // restore interrupted flag
+                    System.err.println("Spawn delay interrupted: " + e.getMessage());
+                }
             }
 
             case "giveGold" -> {
