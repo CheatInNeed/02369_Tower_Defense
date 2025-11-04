@@ -41,4 +41,11 @@ public class TowerControllerTest {
         assertEquals(0,controller.getTowers().size());
 
     }
+    @Test
+    void CannonTowerHasShot(){
+        controller.placeTower("cannon", 2, 24);
+        List<Tower> list = controller.getTowers();
+        Tower t = list.get(0);
+        assertEquals("CannonTower fires!",t.attack());
+    }
 }

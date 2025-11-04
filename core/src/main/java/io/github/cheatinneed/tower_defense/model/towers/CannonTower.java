@@ -7,8 +7,8 @@ public class CannonTower extends AbstractTower implements ProjectileTower {
     }
 
     @Override
-    public void attack() {
-        System.out.println("CannonTower fires!");
+    public String attack() {
+        return "CannonTower fires!";
         //createProjectile();
     }
 }

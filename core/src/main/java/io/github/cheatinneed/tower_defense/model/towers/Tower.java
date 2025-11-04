@@ -11,5 +11,5 @@ public interface Tower {
     float getRange();
     int getCost();
 
-    void attack();
+    String attack();
 }
