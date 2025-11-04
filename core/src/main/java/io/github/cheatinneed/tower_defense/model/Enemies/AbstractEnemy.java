@@ -5,12 +5,15 @@ public abstract class AbstractEnemy implements Enemy {
     int maxHealth;
     int currentHealth;
     int level;
+    int speed;
 
-    public AbstractEnemy(float x, float y, int maxHealth) {
+    public AbstractEnemy(float x, float y, int maxHealth, int speed) {
+
         this.x = x;
         this.y = y;
         this.maxHealth = maxHealth;
         this.currentHealth = maxHealth;
+        this.speed = speed;
         this.level = 1;
     }
 
