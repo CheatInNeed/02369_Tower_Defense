@@ -6,13 +6,15 @@ public abstract class AbstractTower implements Tower {
     protected int health;
     protected float range;
     protected int level;
+    protected int cost;
 
-    public AbstractTower(float x, float y, int health, float range) {
+    public AbstractTower(float x, float y, int health, float range, int cost) {
         this.x = x;
         this.y = y;
         this.health = health;
         this.range = range;
         this.level = 1;
+        this.cost = cost;
     }
 
     @Override
@@ -39,4 +41,6 @@ public abstract class AbstractTower implements Tower {
     @Override
     public void upgrade() {
     }
+    @Override
+    public int getCost(){ return cost; }
 }
