@@ -63,5 +63,5 @@ Group 3 - Alexander and Kasper
 - 
 - 
 Sprint 1 conclusion: Thursday 06/11:
-We should have implemented gameloop as the first thing and then iterated our additions afterward. Therefore some from the group will ensure this before sprint 2 can start. 
+We should have implemented gameloop and controller flow as the first thing and then iterated our additions afterward. Therefore some from the group will ensure this before sprint 2 can start. 
 We will meet again monday 10/11 and plan and start sprint 2. 
