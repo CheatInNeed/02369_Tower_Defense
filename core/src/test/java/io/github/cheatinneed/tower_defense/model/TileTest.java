@@ -1,4 +1,4 @@
-package io.github.cheatinneed.tower_defense.model.enemies;
+package io.github.cheatinneed.tower_defense.model;
 
 import io.github.cheatinneed.tower_defense.model.Map.Tile;
 import io.github.cheatinneed.tower_defense.model.Map.TileType;
