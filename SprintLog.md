@@ -50,9 +50,10 @@ Group 2 - Peter and peter
 - Implemented logic for maps with tile classes. 
 - None of the graphic is done yet. 
 
-Group 3 - Alexander and Casper
+Group 3 - Alexander and Kasper
 - 
 
 
 ## Looked at git
 
+We should have implemented gameloop as the first thing and then iterated our additions afterward
