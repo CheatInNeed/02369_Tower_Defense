@@ -56,4 +56,12 @@ Group 3 - Alexander and Kasper
 
 ## Looked at git
 
-We should have implemented gameloop as the first thing and then iterated our additions afterward
+
+## feedback from presentation (changelog)
+- Don't get caught up in the tech stack. Maybe stop using libGDX to ensure faster development and thereby having a product to show to the customer earlier. 
+- Terminal based "mvp" or minimal GUI - just show SOMETHING to the customer!
+- 
+- 
+Sprint 1 conclusion: Thursday 06/11:
+We should have implemented gameloop as the first thing and then iterated our additions afterward. Therefore some from the group will ensure this before sprint 2 can start. 
+We will meet again monday 10/11 and plan and start sprint 2. 
