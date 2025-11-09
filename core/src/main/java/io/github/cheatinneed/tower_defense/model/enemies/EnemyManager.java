@@ -45,30 +45,6 @@ public class EnemyManager {
         }
     }*/
 
-    public void draw(SpriteBatch batch) {
-        // ensure pixel texture is created
-        if (pixel == null) {
-            Pixmap pix = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-            pix.setColor(Color.WHITE);
-            pix.fill();
-            pixel = new Texture(pix);
-            pix.dispose();
-        }
-
-        for (Enemy e : enemies) {
-            batch.setColor(1f, 0f, 0f, 1f); // red
-
-            batch.draw(
-                pixel,
-                e.getX(),
-                e.getY(),
-                16,
-                16
-            );
-
-            batch.setColor(1f, 1f, 1f, 1f); // reset
-        }
-    }
 
 
     public boolean isEmpty() {
