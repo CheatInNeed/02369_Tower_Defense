@@ -1,8 +1,10 @@
+/*
 package io.github.cheatinneed.tower_defense.controller;
 import com.google.gson.JsonObject;
-import io.github.cheatinneed.tower_defense.model.Enemies.Enemy;
-import io.github.cheatinneed.tower_defense.model.Enemies.EnemyFactory;
+import io.github.cheatinneed.tower_defense.model.enemies.Enemy;
+import io.github.cheatinneed.tower_defense.model.enemies.EnemyFactory;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +14,11 @@ public class JsonLineController {
     // The following list and getter is just for test purposes.
     // When the factory creates and enemy it should be passed to the game in some way.
     private final List<Enemy> createdEnemies = new ArrayList<>();
+    private final Path path;
+
+    public JsonLineController(Path path) {
+        this.path = path;
+    }
 
     public List<Enemy> getCreatedEnemies() {
         return createdEnemies;
@@ -33,7 +40,9 @@ public class JsonLineController {
                     if (delay > 0) {
 
                         // TODO: implement som logic with tickrate or delta time instead of delays
-                        /*Thread.sleep(delay * 1000L);  // wait before spawning *1000L to convert to seconds*/
+                        */
+/*Thread.sleep(delay * 1000L);  // wait before spawning *1000L to convert to seconds*//*
+
                         Thread.sleep(delay * 1000L);   // Faster for testing.
                     }
                     Enemy enemy = createEnemy(enemyType, x, y, health, speed);
@@ -56,8 +65,12 @@ public class JsonLineController {
         }
     }
 
-    private Enemy createEnemy(String type, float x, float y, int health, int speed) {
-        return EnemyFactory.createEnemy(type, x, y, health, speed);
+    private Enemy createEnemy(String type, int health, float speed) {
+        Enemy e = EnemyFactory.createEnemy(type, path);
+        e.setCurrentHealth(health);
+        e.setPosition(path.getPoint(0).x(), path.getPoint(0).y());
+        // if speed is customizable, add setter in enemy or adjust factory
+        return e;
     }
 
     private void spawnEnemy(Enemy enemy) {
@@ -70,3 +83,4 @@ public class JsonLineController {
         //System.out.println("Giving player " + amount + " gold");
     }
 }
+*/
