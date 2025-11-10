@@ -65,3 +65,11 @@ Group 3 - Alexander and Kasper
 Sprint 1 conclusion: Thursday 06/11:
 We should have implemented gameloop and controller flow as the first thing and then iterated our additions afterward. Therefore some from the group will ensure this before sprint 2 can start. 
 We will meet again monday 10/11 and plan and start sprint 2. 
+
+
+## Sprint 2 objective:
+- [] Tower placement - with simple sprite - Towers shooting (targeting maybe next sprint) - Ludvig og Alexander
+- [] Enemies - Sprites, more waves - Roland 
+- [] Maps and paths, non- and buildable tiles, Kasper
+- [] Game state - pause, next wave (maybe main menu) Yaasir og peter 
+- []
