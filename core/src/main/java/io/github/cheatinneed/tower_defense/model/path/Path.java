@@ -1,5 +1,6 @@
 package io.github.cheatinneed.tower_defense.model.path;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Path {
@@ -15,5 +16,17 @@ public class Path {
 
     public PathPoint getPoint(int index) {
         return points.get(index);
+    }
+
+    public static PathPoint convertToBottomLeft(float x, float y, int mapHeight) {
+        return new PathPoint(x, mapHeight - y);
+    }
+
+    public static List<PathPoint> convertPath(List<PathPoint> topLeftPoints, int mapHeight) {
+        List<PathPoint> converted = new ArrayList<>();
+        for (PathPoint p : topLeftPoints) {
+            converted.add(new PathPoint(p.x(), mapHeight - p.y()));
+        }
+        return converted;
     }
 }
