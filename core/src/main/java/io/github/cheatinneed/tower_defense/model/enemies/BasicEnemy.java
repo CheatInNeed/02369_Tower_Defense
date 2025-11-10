@@ -6,4 +6,9 @@ public class BasicEnemy extends AbstractEnemy {
     public BasicEnemy(Path path) {
         super(path, 1.5f, 50); // speed, health (example values!)
     }
+
+    @Override
+    public EnemyType getType() {
+        return EnemyType.BASIC;
+    }
 }

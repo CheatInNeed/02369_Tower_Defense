@@ -6,4 +6,9 @@ public class CustomEnemy extends AbstractEnemy {
     public CustomEnemy(Path path, float speed, int health) {
         super(path, speed, health);
     }
+
+    @Override
+    public EnemyType getType() {
+        return EnemyType.CUSTOM;
+    }
 }

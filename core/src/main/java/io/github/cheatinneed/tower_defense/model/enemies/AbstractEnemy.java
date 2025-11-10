@@ -14,6 +14,9 @@ public abstract class AbstractEnemy implements Enemy {
     protected final Path path;
     protected int pathIndex = 0;
 
+    @Override
+    public abstract EnemyType getType();
+
     public AbstractEnemy(Path path, float speed, int maxHealth) {
         this.path = path;
         this.speed = speed;

@@ -6,10 +6,19 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Color;
 import io.github.cheatinneed.tower_defense.model.enemies.Enemy;
 import io.github.cheatinneed.tower_defense.model.enemies.EnemyManager;
+import java.util.HashMap;
+import java.util.Map;
+import io.github.cheatinneed.tower_defense.model.enemies.EnemyType;
 
 public class EnemyRenderer {
 
+    private static Map<EnemyType, Texture> textures = new HashMap<>();
     private static Texture pixel;
+
+    public static void load() {
+        textures.put(EnemyType.BASIC, new Texture("basicEnemy.png"));
+        textures.put(EnemyType.CUSTOM, new Texture("customEnemy.png"));
+    }
 
     private static Texture getPixel() {
         if (pixel == null) {
@@ -24,9 +33,20 @@ public class EnemyRenderer {
 
     public static void draw(SpriteBatch batch) {
         for (Enemy e : EnemyManager.getInstance().getEnemies()) {
-            batch.setColor(1f, 0f, 0f, 1f);
-            batch.draw(getPixel(), e.getX(), e.getY(), 16, 16);
-            batch.setColor(1f, 1f, 1f, 1f);
+
+            Texture tex = textures.get(e.getType());
+            if (tex == null) {
+                tex = getPixel(); // fallback hvis texture mangler
+            }
+
+            float size = 48;
+            batch.draw(tex, e.getX(), e.getY(), size, size);
+        }
+    }
+
+    public static void dispose() {
+        for (Texture t : textures.values()) {
+            t.dispose();
         }
     }
 }

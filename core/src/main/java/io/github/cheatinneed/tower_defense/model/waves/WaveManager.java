@@ -17,8 +17,7 @@ public class WaveManager {
         this.path = path;
 
         // example waves
-        waves.add(new Wave(5, 1.0f, "basic", path));
-        waves.add(new Wave(10, 0.8f, "basic", path));
+        waves.add(new Wave(3, 1.0f, "basic", path));
         waves.add(new Wave(3, 2f, "custom", path));
     }
 

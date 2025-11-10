@@ -15,4 +15,5 @@ public interface Enemy {
 
     boolean isDead();
     void update();
+    EnemyType getType();
 }

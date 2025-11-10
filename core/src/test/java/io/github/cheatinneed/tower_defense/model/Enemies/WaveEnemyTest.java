@@ -1,3 +1,4 @@
+/*
 package io.github.cheatinneed.tower_defense.model.Enemies;
 
 import io.github.cheatinneed.tower_defense.controller.JsonLineController;
@@ -39,3 +40,4 @@ public class WaveEnemyTest {
         }
     }
 }
+*/

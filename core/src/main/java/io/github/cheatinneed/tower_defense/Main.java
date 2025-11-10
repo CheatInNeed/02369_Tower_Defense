@@ -27,6 +27,7 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void create() {
+        EnemyRenderer.load();
         batch = new SpriteBatch();
         mapTexture = new Texture("TDmap2.png");
 
@@ -34,25 +35,9 @@ public class Main extends ApplicationAdapter {
         int mapHeight = 1024; // image height
         List<PathPoint> designedPoints = new ArrayList<>();
 
-        designedPoints.add(new PathPoint(300, 200));   // Start mound
-        designedPoints.add(new PathPoint(900, 200));
+        designedPoints.add(new PathPoint(300, 500));   // Start mound
+        designedPoints.add(new PathPoint(600, 700));
         designedPoints.add(new PathPoint(550, 480));
-
-        designedPoints.add(new PathPoint(750, 480));   // Curve down
-        designedPoints.add(new PathPoint(750, 670));
-
-        designedPoints.add(new PathPoint(550, 670));   // Sweep left
-        designedPoints.add(new PathPoint(350, 670));
-
-        designedPoints.add(new PathPoint(200, 670));   // Curve down again
-        designedPoints.add(new PathPoint(200, 870));
-
-        designedPoints.add(new PathPoint(450, 870));   // Go right
-        designedPoints.add(new PathPoint(750, 870));
-        designedPoints.add(new PathPoint(1050, 870));
-
-        designedPoints.add(new PathPoint(1280, 780));  // Curve up-right
-        designedPoints.add(new PathPoint(1400, 600));
 
         List<PathPoint> gamePoints = Path.convertPath(designedPoints, mapHeight);
 
@@ -86,5 +71,6 @@ public class Main extends ApplicationAdapter {
     public void dispose() {
         batch.dispose();
         mapTexture.dispose();
+        EnemyRenderer.dispose();
     }
 }
