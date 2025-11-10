@@ -39,8 +39,9 @@ public class EnemyRenderer {
                 tex = getPixel(); // fallback hvis texture mangler
             }
 
-            float size = 48;
-            batch.draw(tex, e.getX(), e.getY(), size, size);
+            float size = e.getRenderSize();
+            float half = size / 2f;
+            batch.draw(tex, e.getX() - half, e.getY() - half, size, size);
         }
     }
 
