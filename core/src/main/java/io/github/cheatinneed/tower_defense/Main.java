@@ -27,32 +27,45 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void create() {
+        EnemyRenderer.load();
         batch = new SpriteBatch();
-        mapTexture = new Texture("TDmap2.png");
+        mapTexture = new Texture("TDmap3.png");
 
         // Build path
         int mapHeight = 1024; // image height
         List<PathPoint> designedPoints = new ArrayList<>();
 
-        designedPoints.add(new PathPoint(300, 200));   // Start mound
-        designedPoints.add(new PathPoint(900, 200));
-        designedPoints.add(new PathPoint(550, 480));
+/*
+        designedPoints.add(new PathPoint(100, 100));
+        designedPoints.add(new PathPoint(200, 100));
+        designedPoints.add(new PathPoint(200, 200));
+        designedPoints.add(new PathPoint(100, 200));
+        designedPoints.add(new PathPoint(100, 100));
+*/
+        designedPoints.add(new PathPoint(172, 166));
+        designedPoints.add(new PathPoint(814, 166)); ;
+        designedPoints.add(new PathPoint(865, 275));
+        designedPoints.add(new PathPoint(814, 388)); ;
+        designedPoints.add(new PathPoint(166, 399));
+        designedPoints.add(new PathPoint(85, 506));
+        designedPoints.add(new PathPoint(160, 621));
+        designedPoints.add(new PathPoint(810, 621));
+        designedPoints.add(new PathPoint(860, 695));
+        designedPoints.add(new PathPoint(854, 854));
 
-        designedPoints.add(new PathPoint(750, 480));   // Curve down
-        designedPoints.add(new PathPoint(750, 670));
 
-        designedPoints.add(new PathPoint(550, 670));   // Sweep left
-        designedPoints.add(new PathPoint(350, 670));
-
-        designedPoints.add(new PathPoint(200, 670));   // Curve down again
-        designedPoints.add(new PathPoint(200, 870));
-
-        designedPoints.add(new PathPoint(450, 870));   // Go right
-        designedPoints.add(new PathPoint(750, 870));
-        designedPoints.add(new PathPoint(1050, 870));
-
-        designedPoints.add(new PathPoint(1280, 780));  // Curve up-right
-        designedPoints.add(new PathPoint(1400, 600));
+/*
+        designedPoints.add(new PathPoint(867, 280));
+        designedPoints.add(new PathPoint(822, 391));
+        designedPoints.add(new PathPoint(182, 393));
+        designedPoints.add(new PathPoint(98, 436));
+        designedPoints.add(new PathPoint(88, 510));
+        designedPoints.add(new PathPoint(106, 588));
+        designedPoints.add(new PathPoint(183, 624));
+        designedPoints.add(new PathPoint(776, 628));
+        designedPoints.add(new PathPoint(842, 667));
+        designedPoints.add(new PathPoint(853, 821));
+*/
 
         List<PathPoint> gamePoints = Path.convertPath(designedPoints, mapHeight);
 
@@ -86,5 +99,6 @@ public class Main extends ApplicationAdapter {
     public void dispose() {
         batch.dispose();
         mapTexture.dispose();
+        EnemyRenderer.dispose();
     }
 }

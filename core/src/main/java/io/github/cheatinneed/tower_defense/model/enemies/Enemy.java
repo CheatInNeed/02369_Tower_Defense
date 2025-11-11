@@ -5,6 +5,7 @@ public interface Enemy {
     float getX();
     float getY();
     float getSpeed();
+    float getRenderSize();
 
     int getCurrentHealth();
     int getMaxHealth();
@@ -15,4 +16,5 @@ public interface Enemy {
 
     boolean isDead();
     void update();
+    EnemyType getType();
 }
