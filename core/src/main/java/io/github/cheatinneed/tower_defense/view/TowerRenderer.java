@@ -7,13 +7,20 @@ import com.badlogic.gdx.graphics.Color;
 
 import io.github.cheatinneed.tower_defense.model.towers.Tower;
 import io.github.cheatinneed.tower_defense.model.towers.TowerManager;
+import io.github.cheatinneed.tower_defense.model.towers.CannonTower;
+// import other tower subclasses if you have them
 
 public class TowerRenderer {
+
     private static Texture cannonTex;
     private static Texture pixel;
 
     public static void load() {
-        cannonTex = new Texture("cannon.png");
+        try {
+            cannonTex = new Texture("cannon.png");
+        } catch (Exception e) {
+            System.err.println("⚠️ Missing cannon.png, using placeholder texture.");
+        }
     }
 
     private static Texture getPixel() {
@@ -27,12 +34,49 @@ public class TowerRenderer {
         return pixel;
     }
 
+    private static Texture textureFor(Tower t) {
+        if (t instanceof CannonTower) return cannonTex;
+        return null;
+    }
+
+    private static float rotationOf(Tower t) {
+        try {
+            return (float) t.getClass().getMethod("getRotation").invoke(t);
+        } catch (Exception ignored) {
+            return 0f;
+        }
+    }
+
+    private static float sizeOf(Tower t) {
+        try {
+            return (float) t.getClass().getMethod("getRenderSize").invoke(t);
+        } catch (Exception ignored) {
+            return 40f;
+        }
+    }
+
     public static void draw(SpriteBatch batch) {
         for (Tower t : TowerManager.getInstance().getTowers()) {
-            Texture tex = cannonTex != null ? cannonTex : getPixel();
-            float size = 40f; // visual size (independent of grid size)
+            Texture tex = textureFor(t);
+            if (tex == null) tex = getPixel();
+
+            float size = sizeOf(t);
             float half = size / 2f;
-            batch.draw(tex, t.getX() - half, t.getY() - half, size, size);
+            float rot  = rotationOf(t);
+
+            // 🔁 Adjust rotation 90° counterclockwise (left)
+            rot -= 90f;
+
+            batch.draw(
+                    tex,
+                    t.getX() - half, t.getY() - half, // position
+                    half, half,                       // rotation origin
+                    size, size,                       // width/height
+                    1f, 1f,                           // scale
+                    rot,                               // rotation degrees
+                    0, 0, tex.getWidth(), tex.getHeight(),
+                    false, false
+            );
         }
     }
 

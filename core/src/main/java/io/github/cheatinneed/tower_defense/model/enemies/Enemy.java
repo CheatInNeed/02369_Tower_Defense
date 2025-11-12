@@ -7,12 +7,12 @@ public interface Enemy {
     float getSpeed();
     float getRenderSize();
 
-    int getCurrentHealth();
-    int getMaxHealth();
+    float getCurrentHealth();
+    float getMaxHealth();
 
-    void setCurrentHealth(int health);
+    void setCurrentHealth(float health);
     void setPosition(float x, float y);
-    void damage(int amount);
+    void damage(float amount);
 
     boolean isDead();
     void update();

@@ -33,8 +33,7 @@ public class Projectile {
         // Hit?
         float hr2 = hitRadius * hitRadius;
         if (d2 <= hr2) {
-            // Apply damage (rename if your Enemy uses a different method)
-            // TODO: IMPLEMENT // target.takeDamage(damage);
+            target.damage(damage);
             alive = false;
             return;
         }

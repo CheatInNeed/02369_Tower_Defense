@@ -13,24 +13,32 @@ public class TowerManager {
 
     private TowerManager() {}
 
-    public void add(Tower t) { towers.add(t); }
+    public void add(Tower tower) {
+        if (tower != null) towers.add(tower);
+    }
 
-    public boolean isOccupied(float x, float y, float snap) {
-        // basic overlap: same snapped cell
-        float sx = (float)Math.floor(x / snap);
-        float sy = (float)Math.floor(y / snap);
-        for (Tower t : towers) {
-            float tx = (float)Math.floor(t.getX() / snap);
-            float ty = (float)Math.floor(t.getY() / snap);
+    public Array<Tower> getTowers() {
+        return towers;
+    }
+
+    /** Call this once per frame from your main render loop. */
+    public void update(float dt) {
+        // update all towers (handles targeting, cooldowns, and shooting)
+        for (int i = 0; i < towers.size; i++) {
+            towers.get(i).update(dt);
+        }
+    }
+
+    /** Optional: prevent placing two towers on the same snapped tile. */
+    public boolean isOccupied(float worldX, float worldY, float snapSize) {
+        float sx = (float)Math.floor(worldX / snapSize);
+        float sy = (float)Math.floor(worldY / snapSize);
+        for (int i = 0; i < towers.size; i++) {
+            Tower t = towers.get(i);
+            float tx = (float)Math.floor(t.getX() / snapSize);
+            float ty = (float)Math.floor(t.getY() / snapSize);
             if (tx == sx && ty == sy) return true;
         }
         return false;
-    }
-
-    public Array<Tower> getTowers() { return towers; }
-
-    public void update(float dt) {
-        // placeholder for tower logic (targeting, cooldowns, etc.)
-        // for (Tower t : towers) t.update(dt);  // if you add update to Tower later
     }
 }
