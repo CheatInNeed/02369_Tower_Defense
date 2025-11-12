@@ -15,9 +15,11 @@ import io.github.cheatinneed.tower_defense.controller.TowerController;
 import io.github.cheatinneed.tower_defense.model.enemies.EnemyManager;
 import io.github.cheatinneed.tower_defense.model.path.Path;
 import io.github.cheatinneed.tower_defense.model.path.PathPoint;
+import io.github.cheatinneed.tower_defense.model.projectiles.ProjectileManager;
 import io.github.cheatinneed.tower_defense.model.waves.WaveManager;
 import io.github.cheatinneed.tower_defense.model.towers.TowerManager;
 import io.github.cheatinneed.tower_defense.view.EnemyRenderer;
+import io.github.cheatinneed.tower_defense.view.ProjectileRenderer;
 import io.github.cheatinneed.tower_defense.view.TowerRenderer;
 public class Main extends ApplicationAdapter {
 
@@ -39,6 +41,7 @@ public class Main extends ApplicationAdapter {
 
         EnemyRenderer.load();
         TowerRenderer.load();
+        ProjectileRenderer.load();
         batch = new SpriteBatch();
         batch.setProjectionMatrix(camera.combined);
         mapTexture = new Texture("TDmap3.png");
@@ -87,7 +90,7 @@ public class Main extends ApplicationAdapter {
         enemyManager = EnemyManager.getInstance();
 
         // Input: click-to-place towers
-        TowerController.getInstance().init(camera, 48); // gridSize 48 as example
+        TowerController.getInstance().init(camera, 128); // gridSize # as example
         Gdx.input.setInputProcessor(new InputMultiplexer(TowerController.getInstance()));
 
 
@@ -101,6 +104,7 @@ public class Main extends ApplicationAdapter {
         waveManager.update(dt);
         enemyManager.update();
         TowerManager.getInstance().update(dt);
+        ProjectileManager.getInstance().update(dt);
 
         draw();
     }
@@ -112,6 +116,7 @@ public class Main extends ApplicationAdapter {
         batch.draw(mapTexture, 0, 0);
         TowerRenderer.draw(batch);
         EnemyRenderer.draw(batch);
+        ProjectileRenderer.draw(batch);
         batch.end();
     }
 
@@ -122,5 +127,6 @@ public class Main extends ApplicationAdapter {
         mapTexture.dispose();
         EnemyRenderer.dispose();
         TowerRenderer.dispose();
+        ProjectileRenderer.dispose();
     }
 }
