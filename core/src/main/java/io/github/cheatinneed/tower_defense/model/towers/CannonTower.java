@@ -1,14 +1,24 @@
 package io.github.cheatinneed.tower_defense.model.towers;
 
-public class CannonTower extends AbstractTower implements ProjectileTower {
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+public class CannonTower extends AbstractTower {
     public CannonTower(float x, float y) {
-        super(x, y, 15, 200, 300);
+        super(x, y);
+        this.range = 180f;
+        this.damage = 15f;
+        this.fireRate = 1.2f;
+        this.projectileSpeed = 500f;
     }
 
     @Override
-    public String attack() {
-        return "CannonTower fires!";
-        //createProjectile();
+    protected void onUpdate(float dt) {
+        // rotate/animate if you’d like
+    }
+
+    @Override
+    public void draw(SpriteBatch batch) {
+        // If TowerRenderer handles visuals, you can keep this empty.
+        // Otherwise, draw the tower sprite at (x,y) here.
     }
 }
