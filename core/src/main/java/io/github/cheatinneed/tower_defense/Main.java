@@ -87,7 +87,7 @@ public class Main extends ApplicationAdapter {
         enemyManager = EnemyManager.getInstance();
 
         // Input: click-to-place towers
-        TowerController.getInstance().init(camera, 48); // gridSize 48 as example
+        TowerController.getInstance().init(camera, 128); // gridSize # as example
         Gdx.input.setInputProcessor(new InputMultiplexer(TowerController.getInstance()));
 
 
