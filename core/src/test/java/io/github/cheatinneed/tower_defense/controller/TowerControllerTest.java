@@ -1,9 +1,6 @@
 package io.github.cheatinneed.tower_defense.controller;
 
-import io.github.cheatinneed.tower_defense.model.towers.AbstractTower;
-import io.github.cheatinneed.tower_defense.model.towers.CannonTower;
-import io.github.cheatinneed.tower_defense.model.towers.Tower;
-import io.github.cheatinneed.tower_defense.model.towers.TowerFactory;
+import io.github.cheatinneed.tower_defense.model.towers.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +19,7 @@ public class TowerControllerTest {
 
     @BeforeEach
     void setup() {
-        controller = new TowerController();
+        controller = TowerController.getInstance();
         factory = new TowerFactory();
 
     }

@@ -2,20 +2,23 @@ package io.github.cheatinneed.tower_defense;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import io.github.cheatinneed.tower_defense.controller.TowerController;
 import io.github.cheatinneed.tower_defense.model.enemies.EnemyManager;
 import io.github.cheatinneed.tower_defense.model.path.Path;
 import io.github.cheatinneed.tower_defense.model.path.PathPoint;
 import io.github.cheatinneed.tower_defense.model.waves.WaveManager;
+import io.github.cheatinneed.tower_defense.model.towers.TowerManager;
 import io.github.cheatinneed.tower_defense.view.EnemyRenderer;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
+import io.github.cheatinneed.tower_defense.view.TowerRenderer;
 public class Main extends ApplicationAdapter {
 
     private SpriteBatch batch;
@@ -24,11 +27,20 @@ public class Main extends ApplicationAdapter {
     private WaveManager waveManager;
     private EnemyManager enemyManager;
     private Path path;
+    private OrthographicCamera camera;
 
     @Override
     public void create() {
+        int w = Gdx.graphics.getWidth();
+        int h = Gdx.graphics.getHeight();
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, w, h);
+        camera.update();
+
         EnemyRenderer.load();
+        TowerRenderer.load();
         batch = new SpriteBatch();
+        batch.setProjectionMatrix(camera.combined);
         mapTexture = new Texture("TDmap3.png");
 
         // Build path
@@ -73,6 +85,13 @@ public class Main extends ApplicationAdapter {
 
         waveManager = new WaveManager(path);
         enemyManager = EnemyManager.getInstance();
+
+        // Input: click-to-place towers
+        TowerController.getInstance().init(camera, 48); // gridSize 48 as example
+        Gdx.input.setInputProcessor(new InputMultiplexer(TowerController.getInstance()));
+
+
+
     }
 
     @Override
@@ -81,6 +100,7 @@ public class Main extends ApplicationAdapter {
 
         waveManager.update(dt);
         enemyManager.update();
+        TowerManager.getInstance().update(dt);
 
         draw();
     }
@@ -90,6 +110,7 @@ public class Main extends ApplicationAdapter {
 
         batch.begin();
         batch.draw(mapTexture, 0, 0);
+        TowerRenderer.draw(batch);
         EnemyRenderer.draw(batch);
         batch.end();
     }
@@ -100,5 +121,6 @@ public class Main extends ApplicationAdapter {
         batch.dispose();
         mapTexture.dispose();
         EnemyRenderer.dispose();
+        TowerRenderer.dispose();
     }
 }
