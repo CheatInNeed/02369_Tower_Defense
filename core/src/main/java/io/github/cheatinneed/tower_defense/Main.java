@@ -25,8 +25,8 @@ import java.util.List;
 public class Main extends ApplicationAdapter {
     private SpriteBatch batch;
     private FitViewport viewport;
-    private static final int viewport_width = 1536;
-    private static final int viewport_height = 1024;
+    private static final int viewport_width = 1980;
+    private static final int viewport_height = 1080;
 
     //menu
     private Texture mainMenuTexture;
