@@ -7,14 +7,17 @@ public abstract class AbstractEnemy implements Enemy {
 
     protected float x, y;
     protected float speed;
-    protected int maxHealth;
-    protected int currentHealth;
+    protected float maxHealth;
+    protected float currentHealth;
     protected boolean dead = false;
 
     protected final Path path;
     protected int pathIndex = 0;
 
-    public AbstractEnemy(Path path, float speed, int maxHealth) {
+    @Override
+    public abstract EnemyType getType();
+
+    public AbstractEnemy(Path path, float speed, float maxHealth) {
         this.path = path;
         this.speed = speed;
         this.maxHealth = maxHealth;
@@ -26,17 +29,17 @@ public abstract class AbstractEnemy implements Enemy {
     }
 
     @Override
-    public int getCurrentHealth() {
+    public float getCurrentHealth() {
         return currentHealth;
     }
 
     @Override
-    public int getMaxHealth() {
+    public float getMaxHealth() {
         return maxHealth;
     }
 
     @Override
-    public void setCurrentHealth(int health) {
+    public void setCurrentHealth(float health) {
         this.currentHealth = health;
         if (currentHealth <= 0) dead = true;
     }
@@ -48,7 +51,7 @@ public abstract class AbstractEnemy implements Enemy {
     }
 
     @Override
-    public void damage(int amount) {
+    public void damage(float amount) {
         this.currentHealth -= amount;
         if (currentHealth <= 0) dead = true;
     }
