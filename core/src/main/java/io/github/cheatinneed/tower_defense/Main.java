@@ -25,10 +25,12 @@ public class Main extends ApplicationAdapter {
     private EnemyManager enemyManager;
     private Path path;
 
+
     @Override
     public void create() {
         batch = new SpriteBatch();
-        mapTexture = new Texture("TDmap2.png");
+        mapTexture = new Texture("map2.png");
+
 
         // Build path
         int mapHeight = 1024; // image height
