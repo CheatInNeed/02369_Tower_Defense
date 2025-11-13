@@ -67,6 +67,7 @@ public class GameView {
         stage.act(dt);
         stage.draw();
     }
+    public Stage getStage() { return stage; }
 
     public void dispose() {
         if (stage != null) stage.dispose();

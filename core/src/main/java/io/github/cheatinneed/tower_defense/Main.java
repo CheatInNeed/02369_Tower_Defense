@@ -56,7 +56,7 @@ public class Main extends ApplicationAdapter {
 
         //menu view
         mainMenuView = new MainMenuView(batch, mainMenuTexture);
-        mainMenuView.initUi(viewport);                  // (NY) byg Stage + knapper
+        mainMenuView.initUi(viewport);                  // Stage + knapper
         Gdx.input.setInputProcessor(mainMenuView.getStage());
 
         //game view
@@ -98,7 +98,7 @@ public class Main extends ApplicationAdapter {
         mainMenuView.getPlayButton().addListener(evt -> {
             if (mainMenuView.getPlayButton().isPressed()) {
                 showMenu = false;
-                Gdx.input.setInputProcessor(null); // skift til spillets input når du er klar
+                Gdx.input.setInputProcessor(gameView.getStage()); // skift til spillets input når du er klar
             }
             return false;
         });
@@ -106,6 +106,13 @@ public class Main extends ApplicationAdapter {
         mainMenuView.getExitButton().addListener(evt -> {
             if (mainMenuView.getExitButton().isPressed()) {
                 Gdx.app.exit();
+            }
+            return false;
+        });
+        gameView.getPauseButton().addListener(evt ->{
+            if(gameView.getPauseButton().isPressed()){
+                showMenu = true;
+                Gdx.input.setInputProcessor(mainMenuView.getStage());
             }
             return false;
         });
