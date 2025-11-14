@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Color;
+import io.github.cheatinneed.tower_defense.model.Player;
 
 
 public class EnemyManager {
@@ -21,13 +22,22 @@ public class EnemyManager {
         enemies.add(enemy);
     }
 
-    public void update() {
+    public void update(Player player) {
         for (int i = enemies.size - 1; i >= 0; i--) {
             Enemy e = enemies.get(i);
             e.update();
 
-            if (e.isDead()) {
+            if (e.hasReachedGoal()) {
+                System.out.println("Enemy reached goal!");
+                player.loseLife();
                 enemies.removeIndex(i);
+                continue;
+            }
+
+            if (e.isDead()) {
+                System.out.println("Enemy is dead!");
+                enemies.removeIndex(i);
+                continue;
             }
         }
     }

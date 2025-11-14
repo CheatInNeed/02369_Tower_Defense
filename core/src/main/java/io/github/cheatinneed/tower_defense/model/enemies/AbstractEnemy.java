@@ -10,6 +10,7 @@ public abstract class AbstractEnemy implements Enemy {
     protected float maxHealth;
     protected float currentHealth;
     protected boolean dead = false;
+    private boolean reachedGoal = false;
 
     protected final Path path;
     protected int pathIndex = 0;
@@ -71,11 +72,14 @@ public abstract class AbstractEnemy implements Enemy {
     public float getSpeed() { return speed; }
 
     @Override
+    public boolean hasReachedGoal() { return reachedGoal; }
+
+    @Override
     public void update() {
         if (dead) return;
 
         if (pathIndex >= path.size() - 1) {
-            dead = true;
+            reachedGoal = true;
             return;
         }
 
@@ -106,7 +110,7 @@ public abstract class AbstractEnemy implements Enemy {
             pathIndex++;
 
             if (pathIndex >= path.size() - 1) {
-                dead = true;
+                reachedGoal = true;
             }
         }
     }
