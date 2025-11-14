@@ -91,6 +91,7 @@ public class Main extends ApplicationAdapter {
         List<PathPoint> designedPoints = new ArrayList<>();
         designedPoints.add(new PathPoint(172, 166));
         designedPoints.add(new PathPoint(814, 166));
+        /*designedPoints.add(new PathPoint(814, 166));
         designedPoints.add(new PathPoint(865, 275));
         designedPoints.add(new PathPoint(814, 388));
         designedPoints.add(new PathPoint(166, 399));
@@ -98,7 +99,7 @@ public class Main extends ApplicationAdapter {
         designedPoints.add(new PathPoint(160, 621));
         designedPoints.add(new PathPoint(810, 621));
         designedPoints.add(new PathPoint(860, 695));
-        designedPoints.add(new PathPoint(854, 854));
+        designedPoints.add(new PathPoint(854, 854));*/
 
         path = new Path(Path.convertPath(designedPoints, 1024));
 
