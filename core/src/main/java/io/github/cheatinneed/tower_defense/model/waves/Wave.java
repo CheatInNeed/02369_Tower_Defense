@@ -23,6 +23,14 @@ public class Wave {
         return spawned < enemyCount;
     }
 
+    public int getEnemyCount() {
+        return enemyCount;
+    }
+
+    public int getSpawned() {
+        return spawned;
+    }
+
     public float getSpawnInterval() {
         return spawnInterval;
     }
