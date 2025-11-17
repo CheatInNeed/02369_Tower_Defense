@@ -9,22 +9,18 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.github.cheatinneed.tower_defense.controller.TowerController;
 import io.github.cheatinneed.tower_defense.model.enemies.EnemyManager;
 import io.github.cheatinneed.tower_defense.model.path.Path;
-import io.github.cheatinneed.tower_defense.model.path.PathPoint;
+import io.github.cheatinneed.tower_defense.model.path.TmxPathLoader;
 import io.github.cheatinneed.tower_defense.model.projectiles.ProjectileManager;
 import io.github.cheatinneed.tower_defense.model.towers.TowerManager;
 import io.github.cheatinneed.tower_defense.model.waves.WaveManager;
-
 import io.github.cheatinneed.tower_defense.view.EnemyRenderer;
+import io.github.cheatinneed.tower_defense.view.GameView;
 import io.github.cheatinneed.tower_defense.view.MainMenuView;
 import io.github.cheatinneed.tower_defense.view.ProjectileRenderer;
 import io.github.cheatinneed.tower_defense.view.TowerRenderer;
-import io.github.cheatinneed.tower_defense.view.GameView;
 
 public class Main extends ApplicationAdapter {
 
@@ -52,65 +48,57 @@ public class Main extends ApplicationAdapter {
     @Override
     public void create() {
 
-        // --- CAMERA + VIEWPORT ---
+        // SPRITEBATCH
+        batch = new SpriteBatch();
+
+        // CAMERA + VIEWPORT
         camera = new OrthographicCamera();
         viewport = new FitViewport(viewport_width, viewport_height, camera);
         viewport.apply();
 
-        batch = new SpriteBatch();
-
-        // --- LOAD RENDERERS ---
+        // RENDERERS
         EnemyRenderer.load();
         TowerRenderer.load();
         ProjectileRenderer.load();
 
-        // --- ASSETS ---
-        mapTexture = new Texture("TDmap3.png");
+        // ASSETS
+        mapTexture = new Texture("tiled_map/map4.png");
         mainMenuTexture = new Texture("MainMenu.png");
 
-        // --- MENU VIEW ---
+        // MENU VIEW
         mainMenuView = new MainMenuView(batch, mainMenuTexture);
         mainMenuView.initUi(viewport);
         Gdx.input.setInputProcessor(mainMenuView.getStage());
 
-        // --- GAME VIEW ---
+        // GAME VIEW
         gameView = new GameView(batch, viewport);
-        gameView.setMapTexture(mapTexture);
+        gameView.setMapTexture(mapTexture);  // Tegnes i original størrelse
 
-        // --- BUILD PATH (your version) ---
-        int mapHeight = 1024;
-        List<PathPoint> designedPoints = new ArrayList<>();
-        designedPoints.add(new PathPoint(172, 166));
-        designedPoints.add(new PathPoint(814, 166));
-        designedPoints.add(new PathPoint(865, 275));
-        designedPoints.add(new PathPoint(814, 388));
-        designedPoints.add(new PathPoint(166, 399));
-        designedPoints.add(new PathPoint(85, 506));
-        designedPoints.add(new PathPoint(160, 621));
-        designedPoints.add(new PathPoint(810, 621));
-        designedPoints.add(new PathPoint(860, 695));
-        designedPoints.add(new PathPoint(854, 854));
+        // PATH (fra TMX)
+        path = TmxPathLoader.loadPath(
+            "tiled_map/map4.tmx",
+            "path",
+            "main"
+        );
 
-        List<PathPoint> gamePoints = Path.convertPath(designedPoints, mapHeight);
-        path = new Path(gamePoints);
-
+        // WAVE + ENEMY MANAGERS
         waveManager = new WaveManager(path);
         enemyManager = EnemyManager.getInstance();
 
-        // --- TOWER INPUT ---
+        // TOWER INPUT
         TowerController.getInstance().init(camera, 128);
 
-        // ---------------- BUTTON HANDLERS ----------------
-
+        // BUTTON HANDLERS
         mainMenuView.getPlayButton().addListener(evt -> {
             if (mainMenuView.getPlayButton().isPressed()) {
+
                 showMenu = false;
 
-                // Input in game: UI + tower controller
                 InputMultiplexer multiplexer = new InputMultiplexer(
                     gameView.getStage(),
                     TowerController.getInstance()
                 );
+
                 Gdx.input.setInputProcessor(multiplexer);
             }
             return false;
@@ -125,6 +113,7 @@ public class Main extends ApplicationAdapter {
 
         gameView.getPauseButton().addListener(evt -> {
             if (gameView.getPauseButton().isPressed()) {
+
                 showMenu = true;
                 Gdx.input.setInputProcessor(mainMenuView.getStage());
             }
@@ -143,19 +132,19 @@ public class Main extends ApplicationAdapter {
 
         float dt = Gdx.graphics.getDeltaTime();
 
-        // --- GAME UPDATES ---
+        // GAME UPDATES
         waveManager.update(dt);
         enemyManager.update();
         TowerManager.getInstance().update(dt);
         ProjectileManager.getInstance().update(dt);
 
-        // --- CLEAR SCREEN ---
+        // CLEAR
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // --- DRAW GAME VIEW ---
+        // DRAW GAMEVIEW (baggrund + UI)
         gameView.render(dt);
 
-        // --- DRAW RENDERERS ---
+        // DRAW RENDERERS (fjender, towers, projektiler)
         batch.begin();
         TowerRenderer.draw(batch);
         EnemyRenderer.draw(batch);

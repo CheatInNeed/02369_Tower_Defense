@@ -52,14 +52,9 @@ public class GameView {
         batch.begin();
         // Tegn kortet strakt til viewportens “world size”
         if (mapTexture != null) {
-            batch.draw(
-                mapTexture,
-                0f, 0f,
-                (float) viewport.getWorldWidth(),
-                (float) viewport.getWorldHeight()
-            );
+            // tegn i texture'ns egen størrelse (samme coords som path-punkterne)
+            batch.draw(mapTexture, 0f, 0f);
         }
-
         // Tegn enemies (og evt. andet “world”-lager)
         EnemyRenderer.draw(batch);
 
