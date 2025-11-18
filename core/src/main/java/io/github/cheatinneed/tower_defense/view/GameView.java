@@ -127,6 +127,10 @@ public class GameView {
         stage.act(dt);
         stage.draw();
     }
+    public void resize(int width, int height) {
+        viewport.update(width, height, true);
+    }
+
 
     public void dispose() {
         if (stage != null) stage.dispose();

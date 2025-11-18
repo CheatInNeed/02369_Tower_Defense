@@ -87,18 +87,16 @@ public class MainMenuView {
         stage.draw();
     }
 
-    public void resize(int width, int height) {
-        if (stage != null) {
-            stage.getViewport().update(width, height, true);
-        }
-    }
-
     public void dispose() {
         if (stage != null) stage.dispose();
         if (playTexture != null) playTexture.dispose();
         if (exitTexture != null) exitTexture.dispose();
         if (backgroundTexture != null) backgroundTexture.dispose();
     }
+    public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
+    }
+
 
     // Getters – til input routing i Main
     public Stage getStage() { return stage; }

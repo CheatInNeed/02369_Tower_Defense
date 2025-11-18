@@ -47,7 +47,7 @@ public class Main extends ApplicationAdapter {
     public void create() {
 
         camera = new OrthographicCamera();
-        viewport = new FitViewport(1536, 1024, camera);
+        viewport = new FitViewport(1920, 1080, camera);
         viewport.apply();
 
         batch = new SpriteBatch();
@@ -123,14 +123,21 @@ public class Main extends ApplicationAdapter {
         }
 
         gameView.render(dt);
-        /*
-        batch.begin();
-        TowerRenderer.draw(batch);
-        EnemyRenderer.draw(batch);
-        ProjectileRenderer.draw(batch);
-        batch.end();
-         */
     }
+    @Override
+    public void resize(int width, int height) {
+        // Opdater kamera/viewport til den nye skærmstørrelse
+        viewport.update(width, height, true);
+
+        // Fortæl views at verden er blevet resized (så Stage også opdateres)
+        if (gameView != null) {
+            gameView.resize(width, height);
+        }
+        if (mainMenuView != null) {
+            mainMenuView.resize(width, height);
+        }
+    }
+
 
     @Override
     public void dispose() {
