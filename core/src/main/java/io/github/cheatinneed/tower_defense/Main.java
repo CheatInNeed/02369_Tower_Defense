@@ -85,6 +85,7 @@ public class Main extends ApplicationAdapter {
 
         // Tower input
         TowerController.getInstance().init(camera, 128);
+        gameView.setOnNextWaveClicked(() -> gameController.startNextWave());
 
     }
 

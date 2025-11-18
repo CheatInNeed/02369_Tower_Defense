@@ -20,7 +20,11 @@ public class GameView {
 
     private Stage stage;
     private Texture pauseTexture;
+    private Texture nextWaveTexture;
+    private ImageButton nextWaveButton;
     private ImageButton pauseButton;
+    private Runnable onNextWaveClicked;
+
 
     private boolean paused = false;   // 👈 pause-tilstand bor her
 
@@ -46,11 +50,17 @@ public class GameView {
         stage = new Stage(viewport, batch);
 
         pauseTexture = new Texture("Buttons/PauseButton.png");
+        nextWaveTexture = new Texture("Buttons/NextWaveButton.png");
+        nextWaveButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(nextWaveTexture)));
         pauseButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(pauseTexture)));
 
         float buttonSize = 80f;
+        float margin = 10f;
+
         pauseButton.setSize(buttonSize, buttonSize);
-        pauseButton.setPosition(1f, 1f);
+        pauseButton.setPosition(margin, margin);
+        nextWaveButton.setSize(buttonSize, buttonSize);
+        nextWaveButton.setPosition(margin, margin+buttonSize);
 
         // Klik på pause-knap = toggle local paused-flag
         pauseButton.addListener(new ClickListener() {
@@ -60,7 +70,20 @@ public class GameView {
             }
         });
 
+        nextWaveButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (onNextWaveClicked != null) {
+                    onNextWaveClicked.run();
+                }
+            }
+        });
+
         stage.addActor(pauseButton);
+        stage.addActor(nextWaveButton);
+    }
+    public void setOnNextWaveClicked(Runnable onNextWaveClicked) {
+        this.onNextWaveClicked = onNextWaveClicked;
     }
 
     public boolean isPaused() {
@@ -109,6 +132,7 @@ public class GameView {
         if (stage != null) stage.dispose();
         if (pauseTexture != null) pauseTexture.dispose();
         if (mapTexture != null) mapTexture.dispose();
+        if (nextWaveTexture != null) nextWaveTexture.dispose();
 
         EnemyRenderer.dispose();
         TowerRenderer.dispose();

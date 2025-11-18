@@ -6,10 +6,8 @@ import io.github.cheatinneed.tower_defense.model.enemies.EnemyManager;
 import io.github.cheatinneed.tower_defense.model.path.Path;
 
 public class WaveManager {
-
     private final Array<Wave> waves = new Array<>();
     private Wave currentWave;
-
     private float spawnTimer = 0f;
     private final Path path;
 
@@ -20,15 +18,34 @@ public class WaveManager {
         waves.add(new Wave(3, 1.0f, "basic", path));
         waves.add(new Wave(3, 2f, "custom", path));
     }
+    public boolean isWaveRunning(){
+        return currentWave != null;
+    }
+    public boolean hasMoreWaves(){
+        return waves.notEmpty();
+    }
+    public boolean canStartNextWave() {
+        return !isWaveRunning()
+            && waves.notEmpty()
+            && EnemyManager.getInstance().isEmpty();
+    }
+
+    public boolean startNextWave() {
+        if (!canStartNextWave()) {
+            return false;
+        }
+        spawnTimer = 0f;
+        currentWave = waves.removeIndex(0);
+        return true;
+    }
 
     public void update(float dt) {
-        if (currentWave == null && waves.notEmpty()) {
-            currentWave = waves.removeIndex(0);
+        if (currentWave == null){
+            return;
         }
 
-        if (currentWave == null) return;
-
         spawnTimer += dt;
+
 
         if (spawnTimer >= currentWave.getSpawnInterval() && currentWave.hasMoreEnemies()) {
             spawnTimer = 0;

@@ -50,4 +50,7 @@ public class GameController {
     public boolean isPaused() {
         return paused;
     }
+    public void startNextWave() {
+        waveManager.startNextWave();
+    }
 }
