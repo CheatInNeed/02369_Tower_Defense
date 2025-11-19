@@ -5,15 +5,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Color;
 
-import io.github.cheatinneed.tower_defense.model.towers.FlameTower;
-import io.github.cheatinneed.tower_defense.model.towers.Tower;
-import io.github.cheatinneed.tower_defense.model.towers.TowerManager;
-import io.github.cheatinneed.tower_defense.model.towers.CannonTower;
+import io.github.cheatinneed.tower_defense.model.towers.*;
 // import other tower subclasses if you have them
 
 public class TowerRenderer {
 
     private static Texture flameTex;
+    private static Texture stickyTex;
     private static Texture cannonTex;
     private static Texture pixel;
 
@@ -21,6 +19,7 @@ public class TowerRenderer {
         try {
             cannonTex = new Texture("cannon.png");
             flameTex = new Texture("flame.png");
+            stickyTex = new Texture("cum.png");
         } catch (Exception e) {
             System.err.println("⚠️ Missing .png, using placeholder texture.");
         }
@@ -40,6 +39,7 @@ public class TowerRenderer {
     private static Texture textureFor(Tower t) {
         if (t instanceof CannonTower) return cannonTex;
         if (t instanceof FlameTower) return flameTex;
+        if (t instanceof StickyTower) return stickyTex;
         return null;
     }
 
