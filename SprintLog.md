@@ -72,3 +72,29 @@ We will meet again monday 10/11 and plan and start sprint 2.
 - [ ] Enemies - Sprites, more waves - Roland 
 - [ ] Maps and paths, non- and buildable tiles, Kasper
 - [ ] Game state - pause, next wave (maybe main menu) Yaasir og peter
+
+### Sprint 2 completion talk:
+- More scalable solution for maps is needed. For a future sprint
+- All branches are merged and code works!
+- Test driven development not used for this sprint. Tests will be written later. 
+  - Peter Roland will later in the product do "user" tests
+- Peter and Yaasirs work need to comply with the design principles - will be fixed later
+- We now have something to show to costumer! Feedback will be gathered.
+
+- [x] Tower placement - with simple sprite - Towers shooting (targeting maybe next sprint) - Ludvig og Alexander
+- [x] Enemies - Sprites, more waves - Roland
+- [x] Maps and paths, non- and buildable tiles, Kasper
+- [x] Game state - pause, next wave (maybe main menu) Yaasir og peter
+
+## Sprint 3 planning:
+- Kasper: More maps and more scalable solution - Paths and tiles needs to contained in the map - Map loader (TMX)
+  - Tile from map file needs to be the tiles towers are placed on 
+- Alexander og Ludvig: More towers - 3 in total: Cannon (splash), lava/water tower (short range beam?), classic tower (dart monkey) - subject to change. 
+  - Gui for choosing towers
+- Peter og Yaasir: Pausing between waves and main menu continued (Selected ) - start next wave?
+- Roland: Player class - MUST DO!!!
+- Roland: Tests! 
+- 
+- Augments! Cherry on top - will maybe implement in next sprint
+
+Deadline 20/11
