@@ -1,6 +1,8 @@
 package io.github.cheatinneed.tower_defense.model.towers;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import io.github.cheatinneed.tower_defense.model.enemies.Enemy;
+import io.github.cheatinneed.tower_defense.model.projectiles.ProjectileManager;
 
 public class CannonTower extends AbstractTower {
     public CannonTower(float x, float y) {
@@ -9,6 +11,7 @@ public class CannonTower extends AbstractTower {
         this.damage = 15f;
         this.fireRate = 1.2f;
         this.projectileSpeed = 500f;
+        this.type = "cannon";
     }
 
     @Override

@@ -81,7 +81,7 @@ public class TowerPopupRenderer extends Actor {
                 }
                 if (hitButton(worldX, worldY, btn3X, btn3Y, btnWidth, btnHeight)) {
                     // Placeholder third tower type
-                    towerController.setSelectedType("cannon");
+                    towerController.setSelectedType("sticky");
                     towerController.confirmAndPlaceSelected();
                     setVisible(false);
                     return true;
@@ -146,7 +146,7 @@ public class TowerPopupRenderer extends Actor {
 
         font.draw(batch, "Cannon tower", btn1X + 10f, btn1Y + btnHeight - 15f);
         font.draw(batch, "Flame tower",  btn2X + 10f, btn2Y + btnHeight - 15f);
-        font.draw(batch, "Third tower (todo)", btn3X + 10f, btn3Y + btnHeight - 15f);
+        font.draw(batch, "Sticky Tower", btn3X + 10f, btn3Y + btnHeight - 15f);
     }
 
     public static void disposeStatic() {
