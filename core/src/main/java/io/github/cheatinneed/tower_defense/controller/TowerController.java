@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector3;
 
+import io.github.cheatinneed.tower_defense.model.Player;
 import io.github.cheatinneed.tower_defense.model.towers.Tower;
 import io.github.cheatinneed.tower_defense.model.towers.TowerFactory;
 import io.github.cheatinneed.tower_defense.model.towers.TowerManager;
@@ -24,6 +25,7 @@ public class TowerController extends InputAdapter {
     // --- existing stuff ---
     private final List<Tower> towers = new ArrayList<>(); // retained for your tests
     private final Vector3 tmp = new Vector3();
+    private Player player;
 
     private Camera camera;
     private String selectedType = "cannon";
@@ -51,6 +53,19 @@ public class TowerController extends InputAdapter {
     /** Called from GameView to hook up the popup */
     public void setPlacementListener(TowerPlacementListener listener) {
         this.placementListener = listener;
+    }
+
+    public boolean tryPlaceTower(String type, float x, float y, Player player) {
+        Tower t = TowerFactory.createTower(type, x, y);
+
+        if (!player.spendMoney(t.getCost())) {
+            System.out.println("Not enough money!");
+            return false;
+        }
+
+        towers.add(t);
+        TowerManager.getInstance().add(t);
+        return true;
     }
 
     /** Programmatic placement (kept for tests) */
@@ -116,7 +131,16 @@ public class TowerController extends InputAdapter {
      */
     public void confirmAndPlaceSelected() {
         if (!hasPendingPlacement) return;
-        placeTower(selectedType, pendingGx, pendingGy);
+
+        boolean success = tryPlaceTower(selectedType, pendingGx, pendingGy, player);
+        if (!success) {
+            System.out.println("Player couldn't afford this tower!");
+        }
+
         hasPendingPlacement = false;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }

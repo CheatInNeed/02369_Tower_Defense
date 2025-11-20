@@ -12,6 +12,7 @@ public class CannonTower extends AbstractTower {
         this.fireRate = 1.2f;
         this.projectileSpeed = 500f;
         this.type = "cannon";
+        this.cost = 30;
     }
 
     @Override

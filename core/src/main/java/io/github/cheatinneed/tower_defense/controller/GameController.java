@@ -53,4 +53,8 @@ public class GameController {
     public void startNextWave() {
         waveManager.startNextWave();
     }
+
+    public Player getPlayer() {
+        return player;
+    }
 }
