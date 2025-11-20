@@ -83,6 +83,18 @@ public class GameView {
 
         stage.addActor(pauseButton);
         stage.addActor(nextWaveButton);
+
+        // NEW: Popup
+        towerPopup = new TowerPopupRenderer(
+            TowerController.getInstance(),
+            (float) viewport.getWorldWidth(),
+            (float) viewport.getWorldHeight()
+        );
+        stage.addActor(towerPopup);
+
+        // Connect popup to controller
+        TowerController.getInstance()
+            .setPlacementListener((gx, gy) -> towerPopup.show());
     }
     public void setOnNextWaveClicked(Runnable onNextWaveClicked) {
         this.onNextWaveClicked = onNextWaveClicked;
@@ -98,20 +110,7 @@ public class GameView {
 
     public Stage getStage() {
         return stage;
-
-        // NEW: Popup
-        towerPopup = new TowerPopupRenderer(
-            TowerController.getInstance(),
-            (float) viewport.getWorldWidth(),
-            (float) viewport.getWorldHeight()
-        );
-        stage.addActor(towerPopup);
-
-        // Connect popup to controller
-        TowerController.getInstance()
-            .setPlacementListener((gx, gy) -> towerPopup.show());
     }
-
 
     public void setMapTexture(Texture mapTexture) {
         this.mapTexture = mapTexture;
