@@ -40,7 +40,7 @@ public class GameView {
 
     private void loadAssets() {
         // GameView ejer nu sin egen bane-texture
-        mapTexture = new Texture("TDmap3.png");
+        mapTexture = new Texture("tiled_map/map trying tmx loader.png");
 
         // Renderer assets bliver også initialiseret her
         EnemyRenderer.load();
