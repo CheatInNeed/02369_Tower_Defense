@@ -14,6 +14,7 @@ public abstract class AbstractTower implements Tower {
     protected float projectileSpeed = 420f;
     protected float cooldown = 0f;
     protected Enemy target;
+    protected String type;
 
     // 🔁 rotation angle in degrees
     protected float rotation = 0f;
@@ -82,6 +83,6 @@ public abstract class AbstractTower implements Tower {
     }
 
     protected void shoot(Enemy e) {
-        ProjectileManager.getInstance().spawn(x, y, e, projectileSpeed, damage);
+        ProjectileManager.getInstance().spawn(x, y, e, projectileSpeed, damage, this.type);
     }
 }

@@ -1,19 +1,16 @@
 package io.github.cheatinneed.tower_defense.model.towers;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import io.github.cheatinneed.tower_defense.model.enemies.Enemy;
-import io.github.cheatinneed.tower_defense.model.projectiles.ProjectileManager;
 
-public class CannonTower extends AbstractTower {
-    public CannonTower(float x, float y) {
+public class FlameTower extends AbstractTower{
+    public FlameTower(float x, float y) {
         super(x, y);
-        this.range = 180f;
+        this.range = 360f;
         this.damage = 15f;
         this.fireRate = 1.2f;
         this.projectileSpeed = 500f;
-        this.type = "cannon";
+        this.type = "flame";
     }
-
     @Override
     protected void onUpdate(float dt) {
         // rotate/animate if you’d like

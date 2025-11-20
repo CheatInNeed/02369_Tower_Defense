@@ -1,6 +1,6 @@
+// FILE: TowerController.java
 package io.github.cheatinneed.tower_defense.controller;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector3;
@@ -21,6 +21,7 @@ public class TowerController extends InputAdapter {
         return instance;
     }
 
+    // --- existing stuff ---
     private final List<Tower> towers = new ArrayList<>(); // retained for your tests
     private final Vector3 tmp = new Vector3();
 
@@ -28,12 +29,28 @@ public class TowerController extends InputAdapter {
     private String selectedType = "cannon";
     private int gridSize = 48; // snap size; adjust to your art/map
 
+    // --- NEW: pending placement position + listener ---
+    private float pendingGx;
+    private float pendingGy;
+    private boolean hasPendingPlacement = false;
+
+    public interface TowerPlacementListener {
+        void onPlacementRequested(float worldX, float worldY);
+    }
+
+    private TowerPlacementListener placementListener;
+
     private TowerController() {}
 
     /** Call once from Main.create() after you have a Camera */
     public void init(Camera camera, int gridSize) {
         this.camera = camera;
         if (gridSize > 0) this.gridSize = gridSize;
+    }
+
+    /** Called from GameView to hook up the popup */
+    public void setPlacementListener(TowerPlacementListener listener) {
+        this.placementListener = listener;
     }
 
     /** Programmatic placement (kept for tests) */
@@ -52,7 +69,9 @@ public class TowerController extends InputAdapter {
         return Collections.unmodifiableList(towers);
     }
 
-    /** Mouse input → world coords → snap to grid → place if free */
+    /**
+     * Mouse input → world coords → snap to grid → request popup (or place immediately if no listener).
+     */
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if (camera == null) return false;
@@ -70,14 +89,34 @@ public class TowerController extends InputAdapter {
             return false; // already a tower here
         }
 
-        // Optional: hook in your Map model for buildability:
-        // if (!map.canPlaceTower(tileX, tileY)) return false;   // see Map model
+        // store pending tile
+        pendingGx = gx;
+        pendingGy = gy;
+        hasPendingPlacement = true;
 
-        placeTower(selectedType, gx, gy);
+        if (placementListener != null) {
+            // ask UI to open popup
+            placementListener.onPlacementRequested(gx, gy);
+        } else {
+            // fallback: direct placement like before
+            placeTower(selectedType, gx, gy);
+            hasPendingPlacement = false;
+        }
+
         return true;
     }
 
     public void setSelectedType(String type) {
         this.selectedType = type;
+    }
+
+    /**
+     * Called by the popup once the player has chosen a tower type.
+     * Uses the last clicked tile (pendingGx/pendingGy).
+     */
+    public void confirmAndPlaceSelected() {
+        if (!hasPendingPlacement) return;
+        placeTower(selectedType, pendingGx, pendingGy);
+        hasPendingPlacement = false;
     }
 }

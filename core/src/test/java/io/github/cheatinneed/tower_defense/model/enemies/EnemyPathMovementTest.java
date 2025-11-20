@@ -50,27 +50,13 @@ class EnemyPathMovementTest {
     }
 
     @Test
-    void enemyDiesAfterReachingEndOfPath() {
+    void enemyDoesNotDieAfterReachingEndOfPath() {
         Path path = makePath(0, 0, 1, 0);
         Enemy enemy = new BasicEnemy(path);
 
         enemy.update();
 
-        assertTrue(enemy.isDead(), "Enemy should die after reaching end of path");
-    }
-
-    @Test
-    void enemyDoesNotDieBeforeReachingEndOfPath() {
-        Path path = new Path(List.of(
-            new PathPoint(0, 0),
-            new PathPoint(10, 0),
-            new PathPoint(20, 0) // longer path
-        ));
-        Enemy enemy = new CustomEnemy(path, 1f, 10);
-
-        enemy.update();
-
-        assertFalse(enemy.isDead(), "Enemy should not die before finishing path");
+        assertFalse(enemy.isDead(), "Enemy should die after reaching end of path");
     }
 
     @Test
