@@ -86,7 +86,7 @@ public class Main extends ApplicationAdapter {
         enemyManager = EnemyManager.getInstance();
 
         // TOWER INPUT
-        TowerController.getInstance().init(camera, 128);
+        TowerController.getInstance().init(camera, 64);
 
         // BUTTON HANDLERS
         mainMenuView.getPlayButton().addListener(evt -> {
