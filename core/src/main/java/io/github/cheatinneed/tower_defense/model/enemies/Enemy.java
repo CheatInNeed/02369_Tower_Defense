@@ -19,4 +19,6 @@ public interface Enemy {
     EnemyType getType();
 
     boolean hasReachedGoal();
+
+    int getMoneyYield();
 }

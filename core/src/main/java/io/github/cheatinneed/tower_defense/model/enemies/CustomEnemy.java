@@ -7,6 +7,7 @@ public class CustomEnemy extends AbstractEnemy {
 
     public CustomEnemy(Path path, float speed, int health) {
         super(path, speed, health);
+        this.moneyYield = 20;
     }
 
     @Override

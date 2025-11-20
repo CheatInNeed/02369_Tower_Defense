@@ -10,6 +10,7 @@ public class FlameTower extends AbstractTower{
         this.fireRate = 1.2f;
         this.projectileSpeed = 500f;
         this.type = "flame";
+        this.cost = 50;
     }
     @Override
     protected void onUpdate(float dt) {

@@ -36,6 +36,7 @@ public class EnemyManager {
 
             if (e.isDead()) {
                 System.out.println("Enemy is dead!");
+                player.addMoney(e.getMoneyYield());
                 enemies.removeIndex(i);
                 continue;
             }

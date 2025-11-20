@@ -73,6 +73,7 @@ public class Main extends ApplicationAdapter {
 
         waveManager = new WaveManager(path);
         gameController = new GameController(waveManager);
+        TowerController.getInstance().setPlayer(gameController.getPlayer());
 
         gameView = new GameView(batch, viewport);
 

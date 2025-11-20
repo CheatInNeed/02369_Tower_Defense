@@ -10,6 +10,7 @@ public class StickyTower extends AbstractTower {
         this.fireRate = 1.2f;
         this.projectileSpeed = 500f;
         this.type = "sticky";
+        this.cost = 50;
     }
 
     @Override

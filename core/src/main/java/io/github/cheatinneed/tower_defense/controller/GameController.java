@@ -14,6 +14,7 @@ public class GameController {
     private final ProjectileManager projectileManager;
 
     private boolean paused = false;
+    private boolean wasWaveRunning = false;
     private final Player player = new Player();
 
     public GameController(WaveManager waveManager) {
@@ -31,9 +32,19 @@ public class GameController {
         towerManager.update(dt);
         projectileManager.update(dt);
 
+        /*
+        Give player money when the wave is done, and the player is not dead.
+         */
+        boolean isWaveRunning = waveManager.isWaveRunning();
+        if (wasWaveRunning && !isWaveRunning && !player.isDead()) {
+            System.out.println("Player got money for completing wave!");
+            player.addMoney(50);
+        }
+        wasWaveRunning = isWaveRunning;
+
         //System.out.println(player.getLives());
         if (player.isDead()) {
-            System.out.println("PLAYER IS DEAD");
+            //System.out.println("PLAYER IS DEAD");
             // TODO - Handle game over. Game over screen skal vises, skal spillet pauses her.
             //pause();
         }
@@ -52,5 +63,9 @@ public class GameController {
     }
     public void startNextWave() {
         waveManager.startNextWave();
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

@@ -11,4 +11,6 @@ public interface Tower {
 
     /** Optional: returns true if the tower can shoot this enemy (used for logic/debug). */
     default boolean canTarget(Enemy e) { return true; }
+
+    int getCost();
 }

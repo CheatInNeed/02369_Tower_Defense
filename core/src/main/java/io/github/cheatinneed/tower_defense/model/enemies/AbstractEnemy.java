@@ -11,6 +11,7 @@ public abstract class AbstractEnemy implements Enemy {
     protected float currentHealth;
     protected boolean dead = false;
     private boolean reachedGoal = false;
+    protected int moneyYield;
 
     protected final Path path;
     protected int pathIndex = 0;
@@ -73,6 +74,10 @@ public abstract class AbstractEnemy implements Enemy {
 
     @Override
     public boolean hasReachedGoal() { return reachedGoal; }
+
+    public int getMoneyYield() {
+        return moneyYield;
+    }
 
     @Override
     public void update() {
