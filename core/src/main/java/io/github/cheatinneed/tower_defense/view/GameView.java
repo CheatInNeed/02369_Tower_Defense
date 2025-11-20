@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import io.github.cheatinneed.tower_defense.controller.TowerController;
 
 public class GameView {
     private final SpriteBatch batch;
@@ -27,6 +28,7 @@ public class GameView {
 
 
     private boolean paused = false;   // 👈 pause-tilstand bor her
+    private TowerPopupRenderer towerPopup;
 
     public GameView(SpriteBatch batch, Viewport viewport) {
         this.batch = batch;
@@ -96,6 +98,23 @@ public class GameView {
 
     public Stage getStage() {
         return stage;
+
+        // NEW: Popup
+        towerPopup = new TowerPopupRenderer(
+            TowerController.getInstance(),
+            (float) viewport.getWorldWidth(),
+            (float) viewport.getWorldHeight()
+        );
+        stage.addActor(towerPopup);
+
+        // Connect popup to controller
+        TowerController.getInstance()
+            .setPlacementListener((gx, gy) -> towerPopup.show());
+    }
+
+
+    public void setMapTexture(Texture mapTexture) {
+        this.mapTexture = mapTexture;
     }
 
     public void render(float dt) {

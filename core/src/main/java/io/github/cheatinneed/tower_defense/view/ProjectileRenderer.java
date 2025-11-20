@@ -25,6 +25,7 @@ public class ProjectileRenderer {
         var arr = ProjectileManager.getInstance().getProjectiles();
         for (int i = 0; i < arr.size; i++) {
             Projectile p = arr.get(i);
+
             // Tiny square bullet; swap for sprite/region whenever you have art
             batch.draw(pixel, p.getX() - 1, p.getY() - 1, 2, 2);
         }
