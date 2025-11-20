@@ -62,7 +62,7 @@ public class Main extends ApplicationAdapter {
         ProjectileRenderer.load();
 
         // ASSETS
-        mapTexture = new Texture("tiled_map/map4.png");
+        mapTexture = new Texture("tiled_map/map trying tmx loader.png");
         mainMenuTexture = new Texture("MainMenu.png");
 
         // MENU VIEW
@@ -76,7 +76,7 @@ public class Main extends ApplicationAdapter {
 
         // PATH (fra TMX)
         path = TmxPathLoader.loadPath(
-            "tiled_map/map4.tmx",
+            "tiled_map/map trying tmx loader.tmx",
             "path",
             "main"
         );
