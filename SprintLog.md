@@ -98,3 +98,22 @@ We will meet again monday 10/11 and plan and start sprint 2.
 - Augments! Cherry on top - will maybe implement in next sprint
 
 Deadline 20/11
+
+## Sprint 3 conclusion
+-Alex and ludvig - all implemented and merged to main - Towers are not logically different at the moment. For next sprint
+
+-Kasper - it works! Tiles are imported from the map TMX file - No hardcoding of the path is need. Not yet merged to main - Buildable/unbuildable tiles are not implemented yet. For next sprint
+
+-Yaasir og peter - Main is clean and sprites are moved to appropriate view - Pause screen implemented - 
+
+-Peter - Player class is implemented - player now have lives, which are removed when enemy reaches end of path - Moved some logic to better follow MVC
+
+
+## Sprint 4 planning: 
+- Augments - GUI Peter og Yaasir - Logical part - Alexander, Roland and Ludvig (maybe sprint 5)
+- Tower are on top of pop-up (fixed) - maybe different solution - maybe drag-and-drop - Peter and Yaasir
+- Tower actually different - Ludvig and Alexander
+- Player economy - Roland
+- Buildable tiles - Kasper
+- Test!! Mostly logical - Everybody writes test for their own code
+- Overleaf document creation and preparation - Roland
