@@ -32,6 +32,9 @@ public class GameController {
         towerManager.update(dt);
         projectileManager.update(dt);
 
+        /*
+        Give player money when the wave is done, and the player is not dead.
+         */
         boolean isWaveRunning = waveManager.isWaveRunning();
         if (wasWaveRunning && !isWaveRunning && !player.isDead()) {
             System.out.println("Player got money for completing wave!");
