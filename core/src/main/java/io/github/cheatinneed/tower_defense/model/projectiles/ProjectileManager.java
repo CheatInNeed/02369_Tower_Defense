@@ -14,8 +14,8 @@ public class ProjectileManager {
 
     private ProjectileManager() {}
 
-    public void spawn(float x, float y, Enemy target, float speed, float damage) {
-        projectiles.add(new Projectile(x, y, target, speed, damage));
+    public void spawn(float x, float y, Enemy target, float speed, float damage, String type) {
+        projectiles.add(ProjectileFactory.createProjectile(x,y,target,speed,damage,type));
     }
 
     public Array<Projectile> getProjectiles() { return projectiles; }
