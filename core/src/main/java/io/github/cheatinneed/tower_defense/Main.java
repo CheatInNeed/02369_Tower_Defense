@@ -29,15 +29,9 @@ import io.github.cheatinneed.tower_defense.view.TowerRenderer;
 import io.github.cheatinneed.tower_defense.view.GameView;
 
 public class Main extends ApplicationAdapter {
-
     private SpriteBatch batch;
-
     private FitViewport viewport;
     private OrthographicCamera camera;
-
-    private Texture mainMenuTexture;
-    private Texture mapTexture;
-
     private MainMenuView mainMenuView;
     private GameView gameView;
 
@@ -53,7 +47,7 @@ public class Main extends ApplicationAdapter {
     public void create() {
 
         camera = new OrthographicCamera();
-        viewport = new FitViewport(1536, 1024, camera);
+        viewport = new FitViewport(1920, 1080, camera);
         viewport.apply();
 
         batch = new SpriteBatch();
@@ -63,28 +57,9 @@ public class Main extends ApplicationAdapter {
         TowerRenderer.load();
         ProjectileRenderer.load();
 
-        mapTexture = new Texture("TDmap3.png");
-        mainMenuTexture = new Texture("MainMenu.png");
-
         // Menu
         menuController = new MenuController();
-        mainMenuView = new MainMenuView(batch, mainMenuTexture);
-        mainMenuView.initUi(viewport);
-
-        mainMenuView.getPlayButton().addListener(evt -> {
-            if (mainMenuView.getPlayButton().isPressed()) {
-                menuController.onPlayPressed();
-            }
-            return false;
-        });
-
-        mainMenuView.getExitButton().addListener(evt -> {
-            if (mainMenuView.getExitButton().isPressed()) {
-                menuController.onExitPressed();
-            }
-            return false;
-        });
-
+        mainMenuView = new MainMenuView(viewport, menuController);
         Gdx.input.setInputProcessor(mainMenuView.getStage());
 
         // Build path
@@ -107,20 +82,11 @@ public class Main extends ApplicationAdapter {
         gameController = new GameController(waveManager);
 
         gameView = new GameView(batch, viewport);
-        gameView.setMapTexture(mapTexture);
 
         // Tower input
         TowerController.getInstance().init(camera, 128);
+        gameView.setOnNextWaveClicked(() -> gameController.startNextWave());
 
-        // Pause button logic redirected to controller
-        gameView.getPauseButton().addListener(evt -> {
-            if (gameView.getPauseButton().isPressed()) {
-                showMenu = true;
-                gameController.pause();
-                Gdx.input.setInputProcessor(mainMenuView.getStage());
-            }
-            return false;
-        });
     }
 
     @Override
@@ -129,9 +95,10 @@ public class Main extends ApplicationAdapter {
         if (showMenu) {
             mainMenuView.render();
 
-            // Handle menu controller actions
+            // Menu controller actions
             if (menuController.isPlayRequested()) {
                 showMenu = false;
+                gameView.setPaused(false);              // Når vi går i game, er vi IKKE på pause
                 gameController.resume();
 
                 InputMultiplexer multiplexer = new InputMultiplexer(
@@ -151,29 +118,35 @@ public class Main extends ApplicationAdapter {
         }
 
         float dt = Gdx.graphics.getDeltaTime();
-
-        gameController.update(dt);
-
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        if (!gameView.isPaused()) {
+            gameController.update(dt);
+        }
 
         gameView.render(dt);
-
-        batch.begin();
-        TowerRenderer.draw(batch);
-        EnemyRenderer.draw(batch);
-        ProjectileRenderer.draw(batch);
-        batch.end();
     }
+    @Override
+    public void resize(int width, int height) {
+        // Opdater kamera/viewport til den nye skærmstørrelse
+        viewport.update(width, height, true);
+
+        // Fortæl views at verden er blevet resized (så Stage også opdateres)
+        if (gameView != null) {
+            gameView.resize(width, height);
+        }
+        if (mainMenuView != null) {
+            mainMenuView.resize(width, height);
+        }
+    }
+
 
     @Override
     public void dispose() {
         batch.dispose();
-        mapTexture.dispose();
-        mainMenuTexture.dispose();
-
-        mainMenuView.dispose();
-        EnemyRenderer.dispose();
+        if (batch != null) batch.dispose();
+        if (mainMenuView != null) mainMenuView.dispose();
+        /*EnemyRenderer.dispose();
         TowerRenderer.dispose();
         ProjectileRenderer.dispose();
+         */
     }
 }
