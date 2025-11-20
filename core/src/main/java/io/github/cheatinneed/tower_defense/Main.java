@@ -18,6 +18,7 @@ import io.github.cheatinneed.tower_defense.controller.TowerController;
 import io.github.cheatinneed.tower_defense.model.enemies.EnemyManager;
 import io.github.cheatinneed.tower_defense.model.path.Path;
 import io.github.cheatinneed.tower_defense.model.path.PathPoint;
+import io.github.cheatinneed.tower_defense.model.path.TmxPathLoader;
 import io.github.cheatinneed.tower_defense.model.projectiles.ProjectileManager;
 import io.github.cheatinneed.tower_defense.model.towers.TowerManager;
 import io.github.cheatinneed.tower_defense.model.waves.WaveManager;
@@ -62,21 +63,13 @@ public class Main extends ApplicationAdapter {
         mainMenuView = new MainMenuView(viewport, menuController);
         Gdx.input.setInputProcessor(mainMenuView.getStage());
 
-        // Build path
-        List<PathPoint> designedPoints = new ArrayList<>();
-        designedPoints.add(new PathPoint(172, 166));
-        designedPoints.add(new PathPoint(814, 166));
-        /*designedPoints.add(new PathPoint(814, 166));
-        designedPoints.add(new PathPoint(865, 275));
-        designedPoints.add(new PathPoint(814, 388));
-        designedPoints.add(new PathPoint(166, 399));
-        designedPoints.add(new PathPoint(85, 506));
-        designedPoints.add(new PathPoint(160, 621));
-        designedPoints.add(new PathPoint(810, 621));
-        designedPoints.add(new PathPoint(860, 695));
-        designedPoints.add(new PathPoint(854, 854));*/
+        // PATH (fra TMX)
+        path = TmxPathLoader.loadPath(
+            "tiled_map/map trying tmx loader.tmx",
+            "path",
+            "main"
+        );
 
-        path = new Path(Path.convertPath(designedPoints, 1024));
 
         waveManager = new WaveManager(path);
         gameController = new GameController(waveManager);
@@ -84,7 +77,7 @@ public class Main extends ApplicationAdapter {
         gameView = new GameView(batch, viewport);
 
         // Tower input
-        TowerController.getInstance().init(camera, 128);
+        TowerController.getInstance().init(camera, 64);
         gameView.setOnNextWaveClicked(() -> gameController.startNextWave());
 
     }

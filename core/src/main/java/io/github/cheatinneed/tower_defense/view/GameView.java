@@ -40,7 +40,7 @@ public class GameView {
 
     private void loadAssets() {
         // GameView ejer nu sin egen bane-texture
-        mapTexture = new Texture("TDmap3.png");
+        mapTexture = new Texture("tiled_map/map trying tmx loader.png");
 
         // Renderer assets bliver også initialiseret her
         EnemyRenderer.load();
@@ -127,13 +127,10 @@ public class GameView {
         batch.begin();
 
         if (mapTexture != null) {
-            batch.draw(
-                mapTexture,
-                0f, 0f,
-                (float) viewport.getWorldWidth(),
-                (float) viewport.getWorldHeight()
-            );
+            // tegn i texture'ns egen størrelse (samme coords som path-punkterne)
+            batch.draw(mapTexture, 0f, 0f);
         }
+        // Tegn enemies (og evt. andet “world”-lager)
 
         TowerRenderer.draw(batch);
         EnemyRenderer.draw(batch);
