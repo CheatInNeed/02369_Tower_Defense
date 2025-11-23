@@ -64,7 +64,7 @@ public class TowerRenderer {
             Texture tex = textureFor(t);
             if (tex == null) tex = getPixel();
 
-            float size = sizeOf(t);
+            float size = sizeOf(t) * 2;
             float half = size / 2f;
             float rot  = rotationOf(t);
 

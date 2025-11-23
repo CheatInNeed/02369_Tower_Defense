@@ -73,6 +73,14 @@ public abstract class AbstractEnemy implements Enemy {
     public float getSpeed() { return speed; }
 
     @Override
+    public void setSpeed(float factor) {
+        if((this.speed *= factor) < 0.5f){
+            return;
+        }
+        this.speed *= factor;
+    }
+
+    @Override
     public boolean hasReachedGoal() { return reachedGoal; }
 
     public int getMoneyYield() {

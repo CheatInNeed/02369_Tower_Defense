@@ -6,6 +6,7 @@ public interface Projectile {
     public float getX();
     public float getY();
     public void update(float dt);
+    public void onDeath();
 }
 
 

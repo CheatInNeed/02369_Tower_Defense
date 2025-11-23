@@ -13,7 +13,7 @@ public interface Enemy {
     void setCurrentHealth(float health);
     void setPosition(float x, float y);
     void damage(float amount);
-
+    void setSpeed(float factor);
     boolean isDead();
     void update();
     EnemyType getType();

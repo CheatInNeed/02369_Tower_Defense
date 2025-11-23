@@ -1,12 +1,14 @@
 package io.github.cheatinneed.tower_defense.model.towers;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import io.github.cheatinneed.tower_defense.model.enemies.Enemy;
+import io.github.cheatinneed.tower_defense.model.projectiles.ProjectileManager;
 
 public class StickyTower extends AbstractTower {
     public StickyTower(float x, float y) {
         super(x, y);
         this.range = 180f;
-        this.damage = 15f;
+        this.damage = 2f;
         this.fireRate = 1.2f;
         this.projectileSpeed = 500f;
         this.type = "sticky";
@@ -23,5 +25,6 @@ public class StickyTower extends AbstractTower {
         // If TowerRenderer handles visuals, you can keep this empty.
         // Otherwise, draw the tower sprite at (x,y) here.
     }
+
 
 }

@@ -5,9 +5,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class FlameTower extends AbstractTower{
     public FlameTower(float x, float y) {
         super(x, y);
-        this.range = 360f;
-        this.damage = 15f;
-        this.fireRate = 1.2f;
+        this.range = 120f;
+        this.damage = 0.5f;
+        this.fireRate = 50f;
         this.projectileSpeed = 500f;
         this.type = "flame";
         this.cost = 50;

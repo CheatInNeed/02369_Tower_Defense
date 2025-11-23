@@ -21,7 +21,7 @@ public abstract class AbstractProjectile implements Projectile{
     public boolean isAlive() { return alive; }
     public float getX() { return x; }
     public float getY() { return y; }
-
+    public Enemy getTarget(){return  this.target;}
     public void update(float dt) {
         if (!alive) return;
         if (target == null || target.isDead()) { alive = false; return; }
@@ -49,4 +49,5 @@ public abstract class AbstractProjectile implements Projectile{
             alive = false; // overlapping; mark as consumed
         }
     }
+    public void onDeath (){}
 }
