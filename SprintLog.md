@@ -117,3 +117,14 @@ Deadline 20/11
 - Buildable tiles - Kasper
 - Test!! Mostly logical - Everybody writes test for their own code
 - Overleaf document creation and preparation - Roland
+
+
+## raport
+- Introduction - Kasper
+- Customer needs - Ludvig
+- Project Goal - Sammen 
+- System description - Peter
+- Project management -Alexander
+- Team - Roland
+- Constraints & risk - Yaasir
+- Final status - sammen
