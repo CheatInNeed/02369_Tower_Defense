@@ -24,7 +24,10 @@ public class ProjectileManager {
         for (int i = projectiles.size - 1; i >= 0; i--) {
             Projectile p = projectiles.get(i);
             p.update(dt);
-            if (!p.isAlive()) projectiles.removeIndex(i);
+            if (!p.isAlive()){
+                p.onDeath();
+                projectiles.removeIndex(i);
+            }
         }
     }
 }
