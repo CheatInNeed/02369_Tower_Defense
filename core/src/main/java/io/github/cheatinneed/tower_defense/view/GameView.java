@@ -12,12 +12,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import io.github.cheatinneed.tower_defense.controller.TowerController;
+import io.github.cheatinneed.tower_defense.model.Player;
 
 public class GameView {
     private final SpriteBatch batch;
     private final Viewport viewport;
+    private final Player player;
 
     private Texture mapTexture;
+    private HudRenderer hud;
 
     private Stage stage;
     private Texture pauseTexture;
@@ -30,10 +33,10 @@ public class GameView {
     private boolean paused = false;   // 👈 pause-tilstand bor her
     private TowerPopupRenderer towerPopup;
 
-    public GameView(SpriteBatch batch, Viewport viewport) {
+    public GameView(SpriteBatch batch, Viewport viewport, Player player) {
         this.batch = batch;
         this.viewport = viewport;
-
+        this.player = player;
         loadAssets();
         initUi();
     }
@@ -50,6 +53,13 @@ public class GameView {
 
     private void initUi() {
         stage = new Stage(viewport, batch);
+
+        hud = new HudRenderer(
+            player,
+            viewport.getWorldWidth(),
+            viewport.getWorldHeight()
+        );
+        stage.addActor(hud);
 
         pauseTexture = new Texture("Buttons/PauseButton.png");
         nextWaveTexture = new Texture("Buttons/NextWaveButton.png");
@@ -140,6 +150,7 @@ public class GameView {
 
         // UI
         stage.act(dt);
+        hud.update();
         stage.draw();
     }
     public void resize(int width, int height) {
