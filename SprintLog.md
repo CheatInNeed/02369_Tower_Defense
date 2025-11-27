@@ -12,7 +12,7 @@ Objectives:
 TODO - homework
 - [x] Implement class diagram with MVC principle (peter)
 - [x] Create additional user stories (more simple) (Ludvig)
-- [ ] Understand how views are created in libGDX (the rest)
+- [x] Understand how views are created in libGDX (the rest)
 - [ ]
 - [ ]
 
@@ -89,13 +89,13 @@ We will meet again monday 10/11 and plan and start sprint 2.
 Core goals for this sprint: Create GUI for the following user stories:
 
 - [ ] Tower placement - with simple sprite - Towers shooting (targeting maybe next sprint) - Ludvig og Alexander
-  - Continuation of US25 - add sprites and GUI
+  - Continuation of US25 - add sprites and GUI (epic 1)
 - [ ] Enemies - Sprites, more waves - Roland 
-  - Continuation of US26 - add sprites and GUI.
+  - Continuation of US26 - add sprites and GUI. (epic 1)
 - [ ] Maps and paths, non- and buildable tiles, Kasper
-  - Continuation of US24 - add sprites and GUI.
+  - Continuation of US24 - add sprites and GUI. (epic 1)
 - [ ] Game state - pause, main menu and maybe next wave Yaasir og peter
-  - New user story - US23 Pause menu and US21 Main menu
+  - New user story - US23 Pause menu and US21 Main menu (epic 2)
 
 ### Sprint 2 completion talk:
 - More scalable solution for maps is needed. For a future sprint
@@ -113,13 +113,13 @@ Core goals for this sprint: Create GUI for the following user stories:
 ## Sprint 3 planning:
 - Kasper: More maps and more scalable solution - Paths and tiles needs to contained in the map - Map loader (TMX)
   - Tile from map file needs to be the tiles towers are placed on 
-  - US24 - Basic map display - issue map loader
+  - US24 - Basic map display - issue map loader (epic 1)
 - Alexander og Ludvig: More towers - 3 in total: Cannon (splash), lava/water tower (short range beam?), classic tower (dart monkey) - subject to change. 
   - Gui for choosing towers
-  - US18 - new tower types
+  - US18 - new tower types (epic 3)
 - Peter og Yaasir: Pausing between waves and main menu continued (Selected ) - start next wave?
 - Roland: Player class - MUST DO!!!
-  - US 4 - Lives and game over
+  - US 4 - Lives and game over (epic 3)
 - Roland: Tests! 
 - 
 - Augments! Cherry on top - will maybe implement in next sprint
@@ -137,22 +137,22 @@ Deadline 20/11
 
 
 ## Sprint 4 planning: 
-- Pause menu - GUI Peter og Yaasir - Logical part implented in sprint 2 -
-  - US23 - pause menu - sub issue: resume and quit
+- Pause menu - GUI Peter og Yaasir - Logical part implemented in sprint 2 -
+  - US23 - pause menu - sub issue: resume and quit (epic 2)
 - Tower are on top of pop-up (fixed) - maybe different solution - maybe drag-and-drop - Peter and Yaasir
 - Tower actually different - Ludvig and Alexander
-  - US18 continued - Implement logic to make towers actually different
+  - US18 continued - Implement logic to make towers actually different (epic 3)
 - Player economy - Roland
-  - US3: player economy 
+  - US3: player economy (epic 3)
 - Buildable tiles - Kasper
-  - US24 - sub issue map loader continued 
+  - US24 - sub issue map loader continued  (epic 1)
 - Test!! Mostly logical - Everybody writes test for their own code!
 - Overleaf document creation and preparation - Roland
   - Work for the report - not a part of the scrum/sprints
 - Augments are scrapped for now (sad emoji here) . Will be implemented in later sprints if the project continues after this course.
 
 
-## raport
+## report
 - Introduction - Kasper
 - Customer needs - Ludvig
 - Project Goal - Sammen 
