@@ -137,7 +137,7 @@ Deadline 20/11
 
 
 ## Sprint 4 planning: 
-- Pause menu - GUI Peter og Yaasir - Logical part - Alexander, Roland and Ludvig (maybe sprint 5)
+- Pause menu - GUI Peter og Yaasir - Logical part implented in sprint 2 -
   - US23 - pause menu - sub issue: resume and quit
 - Tower are on top of pop-up (fixed) - maybe different solution - maybe drag-and-drop - Peter and Yaasir
 - Tower actually different - Ludvig and Alexander
@@ -149,3 +149,4 @@ Deadline 20/11
 - Test!! Mostly logical - Everybody writes test for their own code!
 - Overleaf document creation and preparation - Roland
   - Work for the report - not a part of the scrum/sprints
+- Augments are scrapped for now (sad emoji here) . Will be implemented in later sprints if the project continues after this course.
