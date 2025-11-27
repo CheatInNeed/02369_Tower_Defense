@@ -1,4 +1,6 @@
 package io.github.cheatinneed.tower_defense.model;
 
-public class GameState {
+public enum GameState {
+    RUNNING,
+    PAUSED
 }
