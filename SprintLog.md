@@ -150,3 +150,14 @@ Deadline 20/11
 - Overleaf document creation and preparation - Roland
   - Work for the report - not a part of the scrum/sprints
 - Augments are scrapped for now (sad emoji here) . Will be implemented in later sprints if the project continues after this course.
+
+
+## raport
+- Introduction - Kasper
+- Customer needs - Ludvig
+- Project Goal - Sammen 
+- System description - Peter
+- Project management -Alexander
+- Team - Roland
+- Constraints & risk - Yaasir
+- Final status - sammen
