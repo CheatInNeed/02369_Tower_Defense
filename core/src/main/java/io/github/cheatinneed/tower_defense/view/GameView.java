@@ -25,12 +25,15 @@ public class GameView {
     private Stage stage;
     private Texture pauseTexture;
     private Texture nextWaveTexture;
+
+    // NYT: fuldskærms pause-menu
+    private Texture pauseMenuTexture;
+
     private ImageButton nextWaveButton;
     private ImageButton pauseButton;
     private Runnable onNextWaveClicked;
 
-
-    private boolean paused = false;   // 👈 pause-tilstand bor her
+    private boolean paused = false;
     private TowerPopupRenderer towerPopup;
 
     public GameView(SpriteBatch batch, Viewport viewport, Player player) {
@@ -42,13 +45,16 @@ public class GameView {
     }
 
     private void loadAssets() {
-        // GameView ejer nu sin egen bane-texture
+        // Bane-texture
         mapTexture = new Texture("tiled_map/map trying tmx loader.png");
 
-        // Renderer assets bliver også initialiseret her
+        // Renderer assets
         EnemyRenderer.load();
         TowerRenderer.load();
         ProjectileRenderer.load();
+
+        // NYT: fuldskærms pause-menu (ligger i core/assets)
+        pauseMenuTexture = new Texture("Pause_MENU.png");
     }
 
     private void initUi() {
@@ -61,8 +67,10 @@ public class GameView {
         );
         stage.addActor(hud);
 
+        // Knap-teksturer
         pauseTexture = new Texture("Buttons/PauseButton.png");
         nextWaveTexture = new Texture("Buttons/NextWaveButton.png");
+
         nextWaveButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(nextWaveTexture)));
         pauseButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(pauseTexture)));
 
@@ -71,10 +79,11 @@ public class GameView {
 
         pauseButton.setSize(buttonSize, buttonSize);
         pauseButton.setPosition(margin, margin);
-        nextWaveButton.setSize(buttonSize, buttonSize);
-        nextWaveButton.setPosition(margin, margin+buttonSize);
 
-        // Klik på pause-knap = toggle local paused-flag
+        nextWaveButton.setSize(buttonSize, buttonSize);
+        nextWaveButton.setPosition(margin, margin + buttonSize);
+
+        // Pause-knap: toggler paused-flag
         pauseButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -82,6 +91,7 @@ public class GameView {
             }
         });
 
+        // Next wave-knap
         nextWaveButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -94,7 +104,7 @@ public class GameView {
         stage.addActor(pauseButton);
         stage.addActor(nextWaveButton);
 
-        // NEW: Popup
+        // Tower-popup
         towerPopup = new TowerPopupRenderer(
             TowerController.getInstance(),
             (float) viewport.getWorldWidth(),
@@ -102,10 +112,10 @@ public class GameView {
         );
         stage.addActor(towerPopup);
 
-        // Connect popup to controller
         TowerController.getInstance()
             .setPlacementListener((gx, gy) -> towerPopup.show());
     }
+
     public void setOnNextWaveClicked(Runnable onNextWaveClicked) {
         this.onNextWaveClicked = onNextWaveClicked;
     }
@@ -127,42 +137,55 @@ public class GameView {
     }
 
     public void render(float dt) {
-        // Clear skærmen sker her
+        // Ryd skærmen
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.setProjectionMatrix(viewport.getCamera().combined);
 
-        // Tegn map + towers + enemies + projectiles
+        // Tegn verden
         batch.begin();
 
         if (mapTexture != null) {
-            // tegn i texture'ns egen størrelse (samme coords som path-punkterne)
             batch.draw(mapTexture, 0f, 0f);
         }
-        // Tegn enemies (og evt. andet “world”-lager)
 
         TowerRenderer.draw(batch);
         EnemyRenderer.draw(batch);
         ProjectileRenderer.draw(batch);
 
+        // ⭐ NYT: hvis paused → tegn Pause_MENU.png hen over hele verden
+        if (paused && pauseMenuTexture != null) {
+            batch.draw(
+                pauseMenuTexture,
+                0f,
+                0f,
+                viewport.getWorldWidth(),
+                viewport.getWorldHeight()
+            );
+        }
+
         batch.end();
 
-        // UI
+        // UI (HUD + knapper + tower-popup)
         stage.act(dt);
         hud.update();
         stage.draw();
     }
+
     public void resize(int width, int height) {
         viewport.update(width, height, true);
     }
 
-
     public void dispose() {
         if (stage != null) stage.dispose();
+
         if (pauseTexture != null) pauseTexture.dispose();
-        if (mapTexture != null) mapTexture.dispose();
         if (nextWaveTexture != null) nextWaveTexture.dispose();
+        if (mapTexture != null) mapTexture.dispose();
+
+        // NYT: ryd op efter pauseMenuTexture
+        if (pauseMenuTexture != null) pauseMenuTexture.dispose();
 
         EnemyRenderer.dispose();
         TowerRenderer.dispose();
