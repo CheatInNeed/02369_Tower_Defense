@@ -10,7 +10,7 @@ Objectives:
 - [x] simple diagrams
 
 TODO - homework
-- [x] Implement class diagram with MVC principle (peter)
+- [x] Implement class diagram with MVC principle (Roland)
 - [x] Create additional user stories (more simple) (Ludvig)
 - [x] Understand how views are created in libGDX (the rest)
 - [ ]
@@ -58,7 +58,7 @@ Core goals for this sprint: Implement backend logic for the following user stori
 
 Group 1 - Ludvig and Yaasir
 - Classes, factories and interfaces has been implemented. A tower can be created and placed at an x and y coordinate. 
-- This group is awaiting functions from the group 2 (peter and peter), so the tower can be placed onto a map graphicly. 
+- This group is awaiting functions from the group 2 (Roland and Peter), so the tower can be placed onto a map graphicly. 
 - Tower methods are implemented conceptually, but no logic are finalized. 
 - The user story is not finalized atm, since we need to tie it together with the other groups. 
 - 
@@ -133,7 +133,7 @@ Deadline 20/11
 
 -Yaasir og peter - Main is clean and sprites are moved to appropriate view - Pause logic and button implemented - Pause screen is not yet done.
 
--Peter - Player class is implemented - player now have lives, which are removed when enemy reaches end of path - Moved some logic to better follow MVC
+-Roland - Player class is implemented - player now have lives, which are removed when enemy reaches end of path - Moved some logic to better follow MVC
 
 
 ## Sprint 4 planning: 
