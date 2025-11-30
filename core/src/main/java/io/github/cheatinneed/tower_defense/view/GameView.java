@@ -27,25 +27,24 @@ public class GameView {
 
     private Stage stage;
 
-    private Texture pauseButtonTexture;
+    private Texture pauseTexture;
     private Texture nextWaveTexture;
 
-    // ⭐ Pause menu textures
-    private Texture pauseMenuTexture;
-    private Texture resumeTexture;
-    private Texture quitTexture;
-
-    private Image pauseMenuBackground;
-    private ImageButton resumeButton;
-    private ImageButton quitButton;
-
-    private ImageButton nextWaveButton;
     private ImageButton pauseButton;
+    private ImageButton nextWaveButton;
+
+    // Pause menu
+    private Texture pauseMenuTexture;
+    private Image pauseMenuImage;
+
+    private ImageButton resumeZone;
+    private ImageButton quitZone;
 
     private Runnable onNextWaveClicked;
-    private Runnable onQuitClicked;   // ← NY callback
+    private Runnable onQuitClicked;
 
     private boolean paused = false;
+
     private TowerPopupRenderer towerPopup;
 
     public GameView(SpriteBatch batch, Viewport viewport, Player player) {
@@ -65,162 +64,165 @@ public class GameView {
         TowerRenderer.load();
         ProjectileRenderer.load();
 
-        pauseButtonTexture = new Texture("Buttons/PauseButton.png");
-        nextWaveTexture   = new Texture("Buttons/NextWaveButton.png");
+        pauseTexture = new Texture("Buttons/PauseButton.png");
+        nextWaveTexture = new Texture("Buttons/NextWaveButton.png");
 
-        // ⭐ PAUSE-MENU
         pauseMenuTexture = new Texture("Pause_MENU.png");
+    }
 
-        resumeTexture = new Texture("Buttons/ResumeButton.png");
-        quitTexture   = new Texture("Buttons/QuitButton.png");
+    private ImageButton createButton(Texture texture) {
+        return new ImageButton(
+            new TextureRegionDrawable(
+                new TextureRegion(texture)
+            )
+        );
     }
 
     private void initUi() {
 
         stage = new Stage(viewport, batch);
 
-        hud = new HudRenderer(player, viewport.getWorldWidth(), viewport.getWorldHeight());
+        hud = new HudRenderer(
+            player,
+            viewport.getWorldWidth(),
+            viewport.getWorldHeight()
+        );
         stage.addActor(hud);
 
-        // ====== GAME BUTTONS ======
+        //---------------- GAME BUTTONS ----------------
 
-        float size = 80f;
-        float margin = 10f;
-
-        pauseButton = new ImageButton(new TextureRegionDrawable(
-            new TextureRegion(pauseButtonTexture)
-        ));
-        pauseButton.setSize(size, size);
-        pauseButton.setPosition(margin, margin);
-
+        pauseButton = createButton(pauseTexture);
+        pauseButton.setSize(80, 80);
+        pauseButton.setPosition(10, 10);
         pauseButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 showPauseMenu();
             }
         });
+        stage.addActor(pauseButton);
 
-        nextWaveButton = new ImageButton(new TextureRegionDrawable(
-            new TextureRegion(nextWaveTexture)
-        ));
-        nextWaveButton.setSize(size, size);
-        nextWaveButton.setPosition(margin, margin + size);
-
+        nextWaveButton = createButton(nextWaveTexture);
+        nextWaveButton.setSize(80, 80);
+        nextWaveButton.setPosition(10, 100);
         nextWaveButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (onNextWaveClicked != null)
-                    onNextWaveClicked.run();
+                if(onNextWaveClicked != null) onNextWaveClicked.run();
             }
         });
-
-        stage.addActor(pauseButton);
         stage.addActor(nextWaveButton);
 
-        // ====== PAUSE MENU UI ======
+        //---------------- PAUSE MENU ----------------
 
-        pauseMenuBackground = new Image(pauseMenuTexture);
-        pauseMenuBackground.setSize(
+        pauseMenuImage = new Image(pauseMenuTexture);
+        pauseMenuImage.setSize(
             viewport.getWorldWidth(),
             viewport.getWorldHeight()
         );
-        pauseMenuBackground.setVisible(false);
+        pauseMenuImage.setPosition(0,0);
+        pauseMenuImage.setVisible(false);
+        stage.addActor(pauseMenuImage);
 
-        resumeButton = new ImageButton(new TextureRegionDrawable(
-            new TextureRegion(resumeTexture)
-        ));
+        //---------------- CLICK ZONES ----------------
 
-        quitButton = new ImageButton(new TextureRegionDrawable(
-            new TextureRegion(quitTexture)
-        ));
+        float vw = viewport.getWorldWidth();
+        float vh = viewport.getWorldHeight();
 
-        float buttonWidth = 240;
-        float buttonHeight = 80;
+        // Disse tal passer korrekt til DIT pause-billede
+        float zoneWidth  = vw * 0.75f;
+        float zoneHeight = vh * 0.25f;
 
-        float centerX = viewport.getWorldWidth() / 2f - buttonWidth / 2f;
-        float centerY = viewport.getWorldHeight() / 2f;
+        float centerX = (vw - zoneWidth) / 2f;
 
-        resumeButton.setSize(buttonWidth, buttonHeight);
-        quitButton.setSize(buttonWidth, buttonHeight);
-
-        resumeButton.setPosition(centerX, centerY + 20);
-        quitButton.setPosition(centerX, centerY - 80);
-
-        // Resume → fortsæt spil
-        resumeButton.addListener(new ClickListener(){
+        // Resume – øverste knap
+        resumeZone = createButton(pauseTexture);
+        resumeZone.setBounds(
+            centerX,
+            vh * 0.39f,
+            zoneWidth,
+            zoneHeight
+        );
+        resumeZone.getImage().setVisible(false);
+        resumeZone.setVisible(false);
+        resumeZone.addListener(new ClickListener(){
             @Override
-            public void clicked(InputEvent event, float x, float y) {
+            public void clicked(InputEvent e, float x, float y) {
                 hidePauseMenu();
             }
         });
+        stage.addActor(resumeZone);
 
-        // Quit → tilbage til main menu
-        quitButton.addListener(new ClickListener(){
+        // Quit – nederste knap
+        quitZone = createButton(pauseTexture);
+        quitZone.setBounds(
+            centerX,
+            vh * 0.22f,
+            zoneWidth,
+            zoneHeight
+        );
+        quitZone.getImage().setVisible(false);
+        quitZone.setVisible(false);
+        quitZone.addListener(new ClickListener(){
             @Override
-            public void clicked(InputEvent event, float x, float y) {
-                if (onQuitClicked != null)
-                    onQuitClicked.run();
+            public void clicked(InputEvent e, float x, float y) {
+                if(onQuitClicked != null) onQuitClicked.run();
             }
         });
+        stage.addActor(quitZone);
 
-        stage.addActor(pauseMenuBackground);
-        stage.addActor(resumeButton);
-        stage.addActor(quitButton);
-
-        hidePauseMenu();
-
-
-        // ===== Tower popup =====
-
+        //---------------- TOWER POPUP ----------------
         towerPopup = new TowerPopupRenderer(
             TowerController.getInstance(),
             viewport.getWorldWidth(),
             viewport.getWorldHeight()
         );
-
         stage.addActor(towerPopup);
 
         TowerController.getInstance()
-            .setPlacementListener((gx, gy) -> towerPopup.show());
+            .setPlacementListener((gx,gy) -> towerPopup.show());
     }
 
-    // ======== Pause handling ========
+    //---------------- PAUSE CONTROL ----------------
 
     private void showPauseMenu() {
         paused = true;
-
-        pauseMenuBackground.setVisible(true);
-        resumeButton.setVisible(true);
-        quitButton.setVisible(true);
+        pauseMenuImage.setVisible(true);
+        resumeZone.setVisible(true);
+        quitZone.setVisible(true);
     }
 
     private void hidePauseMenu() {
         paused = false;
+        pauseMenuImage.setVisible(false);
+        resumeZone.setVisible(false);
+        quitZone.setVisible(false);
+    }
 
-        pauseMenuBackground.setVisible(false);
-        resumeButton.setVisible(false);
-        quitButton.setVisible(false);
+    public void setPaused(boolean value) {
+        if(value) showPauseMenu();
+        else hidePauseMenu();
     }
 
     public boolean isPaused() {
         return paused;
     }
 
-    public void setPaused(boolean paused) {
-        this.paused = paused;
-    }
-
+    //---------------- CALLBACKS ----------------
 
     public void setOnNextWaveClicked(Runnable r) {
-        this.onNextWaveClicked = r;
+        onNextWaveClicked = r;
     }
 
     public void setOnQuitClicked(Runnable r) {
-        this.onQuitClicked = r;
+        onQuitClicked = r;
     }
 
+    public Stage getStage() {
+        return stage;
+    }
 
-    // ====== Render loop ======
+    //---------------- RENDER ----------------
 
     public void render(float dt) {
 
@@ -230,41 +232,32 @@ public class GameView {
         batch.setProjectionMatrix(viewport.getCamera().combined);
 
         batch.begin();
-
-        if (mapTexture != null)
-            batch.draw(mapTexture, 0, 0);
-
+        batch.draw(mapTexture, 0, 0);
         TowerRenderer.draw(batch);
         EnemyRenderer.draw(batch);
         ProjectileRenderer.draw(batch);
-
         batch.end();
 
-        // UI
         stage.act(dt);
         hud.update();
         stage.draw();
     }
 
-    public void resize(int width, int height) {
-        viewport.update(width, height, true);
-    }
+    public void resize(int width,int height) {
+        viewport.update(width,height,true);
 
-    public Stage getStage() {
-        return stage;
+        pauseMenuImage.setSize(
+            viewport.getWorldWidth(),
+            viewport.getWorldHeight()
+        );
     }
 
     public void dispose() {
-
         stage.dispose();
-
-        mapTexture.dispose();
         pauseMenuTexture.dispose();
-        pauseButtonTexture.dispose();
+        pauseTexture.dispose();
         nextWaveTexture.dispose();
-
-        resumeTexture.dispose();
-        quitTexture.dispose();
+        mapTexture.dispose();
 
         EnemyRenderer.dispose();
         TowerRenderer.dispose();
