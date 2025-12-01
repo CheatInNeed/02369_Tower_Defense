@@ -81,6 +81,9 @@ public class Main extends ApplicationAdapter {
         // Tower input
         TowerController.getInstance().init(camera, 60);
         gameView.setOnNextWaveClicked(() -> gameController.startNextWave());
+        gameView.setOnQuitClicked(() -> {
+            Gdx.app.exit();   // Lukker spillet helt
+        });
 
     }
 
